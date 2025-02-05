@@ -133,8 +133,7 @@ To maintain a **clear and structured commit history**, I integrated **Git Commit
 #### Explanation of Elements:
 
 1. **Commit Types**:  
-   The standardized commit types are:
-   <details> <summary>Click to expand</summary>
+   <details> <summary>The standardized commit types are (click here to expand):</summary>
      - **refactor**: Refactoring code without changing functionality.  
      - **feat**: Adding a new feature.  
      - **fix**: Fixing a bug.  
