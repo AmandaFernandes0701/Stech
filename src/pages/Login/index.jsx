@@ -101,8 +101,8 @@ const Login = () => {
             &quot;Search and find your dream job is now easier than ever. Just
             browse a job and apply if you need to.&quot;
           </blockquote>
-          <h2>Mas Parjono</h2>
-          <p>UI Designer at Google</p>
+          <h2>Amanda Fernandes Alves</h2>
+          <p>Software Engineer at Stech</p>
         </TestimonialCard>
       </TestimonialSection>
     </Container>
