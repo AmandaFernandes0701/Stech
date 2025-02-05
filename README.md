@@ -21,7 +21,7 @@ This project was developed as part of a **Software Development Internship Test**
 
 The solution was designed with **clean architecture principles**, ensuring **code reusability, separation of concerns, and an intuitive user experience**.  
 
-The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)  
+The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)
 
 ---
 
@@ -88,7 +88,7 @@ These **architectural decisions enhance maintainability, scalability, and long-t
 ## Project Structure  
 
 ```
-📦 stech-amanda  
+📦 stech
  ┣ 📂 src  
  ┃ ┣ 📂 assets  
  ┃ ┣ 📂 components  
