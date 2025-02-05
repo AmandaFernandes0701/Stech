@@ -7,7 +7,7 @@
 3. [Features and Functionalities](#features-and-functionalities)  
 4. [Architectural Decisions](#architectural-decisions)  
 5. [Project Structure](#project-structure)  
-6. [Code and Naming Conventions](#code-and-naming-conventions)  
+6. [Project Conventions and Naming Standards](#project-conventions-and-naming-standards)  
 7. [Error Handling and Validation](#error-handling-and-validation)  
 8. [Deployment Process](#deployment-process)  
 9. [Installation and Setup](#installation-and-setup)  
@@ -108,10 +108,11 @@ These **architectural decisions enhance maintainability, scalability, and long-t
 
 ---  
 
-## Code and Naming Conventions  
+## Project Conventions and Naming Standards  
 
-To ensure **consistency, readability, and maintainability**, I followed strict **naming conventions** throughout the project:  
+To ensure **consistency, readability, and maintainability**, I followed strict **naming conventions** and commit standards throughout the project:  
 
+### Naming Conventions  
 - **Folders**: Named using **kebab-case** (e.g., `pages`, `components/input-field`).  
 - **JavaScript Files**: Named using **camelCase** (e.g., `validation.js`).  
 - **React Components**: Named using **PascalCase** (e.g., `InputField.jsx`).  
@@ -119,18 +120,39 @@ To ensure **consistency, readability, and maintainability**, I followed strict *
 - **Theme Variables**: Defined in `theme.js`, ensuring **consistent design system usage** across all components.  
 - **Global Styles**: Managed in `GlobalStyles.js` using **Styled Components**, enforcing uniform styling.  
 
----  
-
-## Commit Message Standardization  
-
+### Commit Message Standardization  
 To maintain a **clear and structured commit history**, I integrated **Git Commitizen** to enforce **Conventional Commits**.  
 
-Example commit messages:  
-```sh  
-git commit -m "feat: add email validation to login form"  
-git commit -m "fix: correct button padding issue"  
-git commit -m "refactor: improve input component structure"  
-```  
+#### Commit Format  
+```
+<type>(<scope>): <short description>
+[optional blank line]
+<long description (if necessary)>
+```
+
+#### Explanation of Elements:
+1. **Type**: 
+   - **refactor**: Refactoring code without changing functionality.
+   - **feat**: Adding a new feature.
+   - **fix**: Fixing a bug.
+   - Other types can be used, such as *chore*, *docs*, *style*, *test*, etc.
+
+2. **Scope** (optional but recommended):
+   - Specifies the area of code changed (e.g., `(login)`, `(input-component)`, `(styles)`).
+
+3. **Short Description**: 
+   - A concise and objective phrase explaining the change.  
+
+4. **Long Description** (optional):
+   - Additional details about the change, including why and how it was implemented.
+
+#### Example Commit Messages:
+```sh
+git commit -m "feat(validation): add email validation to login form"
+git commit -m "fix(button): correct padding issue on submit button"
+git commit -m "refactor(inputComponent): modularize input component code"
+```
+
 This ensures **readability, better tracking of changes, and a standardized workflow**.  
 
 ---  
