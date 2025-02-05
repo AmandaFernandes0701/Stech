@@ -13,7 +13,7 @@
 9. [Installation and Setup](#installation-and-setup)  
 10. [Final Considerations](#final-considerations)  
 
----
+---  
 
 ## Project Overview  
 
@@ -21,9 +21,9 @@ This project was developed as part of a **Software Development Internship Test**
 
 The solution was designed with **clean architecture principles**, ensuring **code reusability, separation of concerns, and an intuitive user experience**.  
 
-The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)
+The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)  
 
----
+---  
 
 ## Technologies Used  
 
@@ -41,7 +41,7 @@ To ensure **high performance, maintainability, and scalability**, I selected the
 
 Each technology was carefully selected to **maximize maintainability, performance, and user experience**.  
 
----
+---  
 
 ## Features and Functionalities  
 
@@ -63,7 +63,7 @@ This project incorporates **key features** to enhance usability and maintainabil
 - **Smooth transitions** using Framer Motion for a polished experience.  
 - **Consistent design system** using a global theme for styling.  
 
----
+---  
 
 ## Architectural Decisions  
 
@@ -83,30 +83,30 @@ I designed this project with a **modular, scalable, and maintainable architectur
 
 These **architectural decisions enhance maintainability, scalability, and long-term project sustainability**.  
 
----
+---  
 
 ## Project Structure  
 
 ```
-📦 stech
- ┣ 📂 src                         # Main source code directory
- ┃ ┣ 📂 assets                    # Folder for static assets like images and icons
- ┃ ┣ 📂 components                # Folder with reusable components (buttons, inputs, etc.)
- ┃ ┣ 📂 pages                     # Folder with pages, such as Login, Dashboard
- ┃ ┣ 📂 routes                    # Folder for managing the routes of the project
- ┃ ┣ 📂 styles                    # Folder for global styles and themes, including Styled Components
- ┣ 📂 .vercel                     # Vercel-specific configuration files
- ┣ 📜 .gitignore                  # File to ignore files/folders from being committed to Git
- ┣ 📜 eslint.config.js            # ESLint configuration to ensure code consistency and quality
- ┣ 📜 index.html                  # Main HTML file for the project, entry point
- ┣ 📜 package-lock.json           # Automatically generated file by npm to ensure consistent versions
- ┣ 📜 package.json                # npm configuration file with dependencies and scripts for the project
- ┣ 📜 README.md                   # Project documentation file, containing development information
- ┣ 📜 vite.config.js              # Configuration file for Vite, the module bundler used in the project
+📦 stech  
+ ┣ 📂 src                         # Main source code directory  
+ ┃ ┣ 📂 assets                    # Folder for static assets like images and icons  
+ ┃ ┣ 📂 components                # Folder with reusable components (buttons, inputs, etc.)  
+ ┃ ┣ 📂 pages                     # Folder with pages, such as Login, Dashboard  
+ ┃ ┣ 📂 routes                    # Folder for managing the routes of the project  
+ ┃ ┣ 📂 styles                    # Folder for global styles and themes, including Styled Components  
+ ┃ ┣ 📂 utils                     # Folder for utility functions, such as validation logic (e.g., email and password)  
+ ┣ 📂 .vercel                     # Vercel-specific configuration files  
+ ┣ 📜 .gitignore                  # File to ignore files/folders from being committed to Git  
+ ┣ 📜 eslint.config.js            # ESLint configuration to ensure code consistency and quality  
+ ┣ 📜 index.html                  # Main HTML file for the project, entry point  
+ ┣ 📜 package-lock.json           # Automatically generated file by npm to ensure consistent versions  
+ ┣ 📜 package.json                # npm configuration file with dependencies and scripts for the project  
+ ┣ 📜 README.md                   # Project documentation file, containing development information  
+ ┣ 📜 vite.config.js              # Configuration file for Vite, the module bundler used in the project  
+```  
 
-```
-
----
+---  
 
 ## Code and Naming Conventions  
 
@@ -117,9 +117,9 @@ To ensure **consistency, readability, and maintainability**, I followed strict *
 - **React Components**: Named using **PascalCase** (e.g., `InputField.jsx`).  
 - **Styled Components**: Follow the **same name as the component file**, keeping a **1:1 mapping** between style and component (e.g., `InputField.jsx` and `styles.js`).  
 - **Theme Variables**: Defined in `theme.js`, ensuring **consistent design system usage** across all components.  
-- **Global Styles**: Managed in `GlobalStyles.js` using **Styled Components**, enforcing uniform styling across the entire application.  
+- **Global Styles**: Managed in `GlobalStyles.js` using **Styled Components**, enforcing uniform styling.  
 
----
+---  
 
 ## Commit Message Standardization  
 
@@ -127,13 +127,13 @@ To maintain a **clear and structured commit history**, I integrated **Git Commit
 
 Example commit messages:  
 ```sh  
-git commit -m "feat: add email validation to login form"
-git commit -m "fix: correct button padding issue"
-git commit -m "refactor: improve input component structure"
-```
+git commit -m "feat: add email validation to login form"  
+git commit -m "fix: correct button padding issue"  
+git commit -m "refactor: improve input component structure"  
+```  
 This ensures **readability, better tracking of changes, and a standardized workflow**.  
 
----
+---  
 
 ## Deployment Process  
 
@@ -146,7 +146,7 @@ vercel --prod
 ```  
 This enables **continuous deployment** by integrating with GitHub.  
 
----
+---  
 
 ## Final Considerations  
 
