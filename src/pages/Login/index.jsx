@@ -3,28 +3,22 @@ import { useNavigate } from "react-router-dom";
 import {
   Container,
   Form,
-  Input,
-  Button,
   Title,
   Subtitle,
   ForgotPassword,
   SocialLogin,
   TestimonialSection,
   TestimonialCard,
-  InputWrapper,
-  EyeIcon,
-  Text,
-  ErrorMessage,
-  SpinnerWrapper,
 } from "./styles";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-
-import { validateEmail, validatePassword } from "./validation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InputField from "../../components/InputField/InputField";
+import Button from "../../components/Button/Button";
+
+import { validateEmail, validatePassword } from "./validation";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,21 +28,6 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [dots, setDots] = useState("");
-
-  useEffect(() => {
-    let dotInterval;
-    if (loading) {
-      dotInterval = setInterval(() => {
-        setDots((prev) => {
-          if (prev === "...") return ".";
-          return prev + ".";
-        });
-      }, 500);
-
-      return () => clearInterval(dotInterval);
-    }
-  }, [loading]);
 
   const handleLogin = () => {
     const emailValidationError = validateEmail(email);
@@ -74,48 +53,35 @@ const Login = () => {
       <Form>
         <Title>Welcome Back</Title>
         <Subtitle>Please Enter your Account details</Subtitle>
-        <Text>Email</Text>
-        <Input
+
+        <InputField
           type="email"
+          label="Email"
           placeholder="example@domain.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{
-            borderColor: emailError ? "red" : "",
-            backgroundColor: emailError ? "#ffe6e6" : "",
-            color: emailError ? "black" : "",
-          }}
+          error={emailError}
+          onEnterPress={handleLogin}
         />
-        {emailError && <ErrorMessage>{emailError}</ErrorMessage>}{" "}
-        <Text>Password</Text>
-        <InputWrapper>
-          <Input
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              borderColor: passwordError ? "red" : "",
-              backgroundColor: passwordError ? "#ffe6e6" : "",
-              color: passwordError ? "black" : "",
-            }}
-          />
-          <EyeIcon onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <Visibility /> : <VisibilityOff />}
-          </EyeIcon>
-        </InputWrapper>
-        {passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}{" "}
+
+        <InputField
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={passwordError}
+          onEnterPress={handleLogin}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+
         <ForgotPassword href="#">Forgot Password</ForgotPassword>
+
         <Button onClick={handleLogin} loading={loading}>
-          {loading ? (
-            <SpinnerWrapper>
-              <div className="spinner"></div>
-              <span>Logging in{dots}</span>
-            </SpinnerWrapper>
-          ) : (
-            "Sign in"
-          )}
+          Sign in
         </Button>
+
         <SocialLogin>
           <div className="icon">
             <GoogleIcon fontSize="large" />

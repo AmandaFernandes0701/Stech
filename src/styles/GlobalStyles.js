@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { theme } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -19,24 +20,11 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
-  .Toastify__toast {
-    background-color: #1c1c1c;
-    color: white;
-  }
-
   .Toastify__toast--success {
-    background-color: #1c1c1c; ;
+    background-color: ${theme.colors.toastBackground};
   }
 
   .Toastify__toast--error {
-    background-color: #ff4d4d;
-  }
-
-  .Toastify__toast--info {
-    background-color: #4a90e2;
-  }
-
-  .Toastify__toast--warning {
-    background-color: #f39c12;
+    background-color: ${theme.colors.error};
   }
 `;
