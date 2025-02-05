@@ -89,6 +89,13 @@ These **architectural decisions enhance maintainability, scalability, and long-t
 
 ```
 📦 stech-amanda  
+ ┣ 📂 src  
+ ┃ ┣ 📂 assets  
+ ┃ ┣ 📂 components  
+ ┃ ┣ 📂 pages  
+ ┃ ┣ 📂 routes  
+ ┃ ┣ 📂 styles  
+ ┣ 📂 .vercel  
  ┣ 📜 .gitignore  
  ┣ 📜 eslint.config.js  
  ┣ 📜 index.html  
@@ -97,45 +104,6 @@ These **architectural decisions enhance maintainability, scalability, and long-t
  ┣ 📜 README.md  
  ┣ 📜 structure.txt  
  ┣ 📜 vite.config.js  
- ┃  
- ┣ 📂 .vercel  
- ┃ ┣ 📜 project.json  
- ┃ ┣ 📜 README.txt  
- ┃  
- ┣ 📂 public  
- ┃ ┣ 📜 vite.svg  
- ┃  
- ┣ 📂 src  
- ┃ ┣ 📜 index.jsx  
- ┃ ┃  
- ┃ ┣ 📂 assets  
- ┃ ┃ ┣ 📜 react.svg  
- ┃ ┃  
- ┃ ┣ 📂 components  
- ┃ ┃ ┣ 📂 Button  
- ┃ ┃ ┃ ┣ 📜 Button.jsx  
- ┃ ┃ ┃ ┣ 📜 styles.js  
- ┃ ┃ ┃  
- ┃ ┃ ┣ 📂 InputField  
- ┃ ┃ ┃ ┣ 📜 InputField.jsx  
- ┃ ┃ ┃ ┣ 📜 styles.js  
- ┃  
- ┃ ┣ 📂 pages  
- ┃ ┃ ┣ 📂 Dashboard  
- ┃ ┃ ┃ ┣ 📜 index.jsx  
- ┃ ┃ ┃ ┣ 📜 styles.js  
- ┃ ┃ ┃  
- ┃ ┃ ┣ 📂 Login  
- ┃ ┃ ┃ ┣ 📜 index.jsx  
- ┃ ┃ ┃ ┣ 📜 styles.js  
- ┃ ┃ ┃ ┣ 📜 validation.js  
- ┃  
- ┃ ┣ 📂 routes  
- ┃ ┃ ┣ 📜 Routes.jsx  
- ┃  
- ┃ ┣ 📂 styles  
- ┃ ┃ ┣ 📜 GlobalStyles.js  
- ┃ ┃ ┣ 📜 theme.js  
 ```
 
 ---
