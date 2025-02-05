@@ -15,10 +15,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import InputField from "../../components/InputField/InputField";
-import Button from "../../components/Button/Button";
+import InputField from "../../components/input-field/InputField";
+import Button from "../../components/button/Button";
 
-import { validateEmail, validatePassword } from "./validation";
+import { validateEmail, validatePassword } from "../../utils/validation";
 
 const Login = () => {
   const navigate = useNavigate();
