@@ -134,8 +134,9 @@ To maintain a **clear and structured commit history**, I integrated **Git Commit
 
 1. **Commit Types**:  
    <details> <summary>The standardized commit types are (click here to expand):</summary>
+    
      - **refactor**: Refactoring code without changing functionality.  
-     - **feat**: Adding a new feature.  
+     - **feat**: Adding a new feature.
      - **fix**: Fixing a bug.  
      - **chore**: Maintenance tasks or tasks that don't affect the functionality (e.g., updating dependencies).  
      - **docs**: Documentation updates.  
@@ -145,6 +146,7 @@ To maintain a **clear and structured commit history**, I integrated **Git Commit
      - **ci**: Continuous integration changes (e.g., CI configuration updates).  
      - **build**: Changes related to the build system or external dependencies.  
      - **wip**: Work in progress.
+       
   </details>
 
 2. **Scope** (optional but recommended):
