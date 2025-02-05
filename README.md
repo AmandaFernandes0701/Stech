@@ -88,7 +88,7 @@ These **architectural decisions enhance maintainability, scalability, and long-t
 ## Project Structure  
 
 ```
-📦 stech-amanda  
+📦 stech
  ┣ 📂 src  
  ┃ ┣ 📂 assets  
  ┃ ┣ 📂 components  
