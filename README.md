@@ -89,20 +89,21 @@ These **architectural decisions enhance maintainability, scalability, and long-t
 
 ```
 📦 stech
- ┣ 📂 src  
- ┃ ┣ 📂 assets  
- ┃ ┣ 📂 components  
- ┃ ┣ 📂 pages  
- ┃ ┣ 📂 routes  
- ┃ ┣ 📂 styles  
- ┣ 📂 .vercel  
- ┣ 📜 .gitignore  
- ┣ 📜 eslint.config.js  
- ┣ 📜 index.html  
- ┣ 📜 package-lock.json  
- ┣ 📜 package.json  
- ┣ 📜 README.md   
- ┣ 📜 vite.config.js  
+ ┣ 📂 src               # Main source code directory
+ ┃ ┣ 📂 assets          # Folder for static assets like images and icons
+ ┃ ┣ 📂 components      # Folder with reusable components (buttons, inputs, etc.)
+ ┃ ┣ 📂 pages           # Folder with pages, such as Login, Dashboard
+ ┃ ┣ 📂 routes          # Folder for managing the routes of the project
+ ┃ ┣ 📂 styles          # Folder for global styles and themes, including Styled Components
+ ┣ 📂 .vercel           # Vercel-specific configuration files
+ ┣ 📜 .gitignore        # File to ignore files/folders from being committed to Git
+ ┣ 📜 eslint.config.js  # ESLint configuration to ensure code consistency and quality
+ ┣ 📜 index.html        # Main HTML file for the project, entry point
+ ┣ 📜 package-lock.json # Automatically generated file by npm to ensure consistent versions
+ ┣ 📜 package.json      # npm configuration file with dependencies and scripts for the project
+ ┣ 📜 README.md         # Project documentation file, containing development information
+ ┣ 📜 vite.config.js    # Configuration file for Vite, the module bundler used in the project
+
 ```
 
 ---
