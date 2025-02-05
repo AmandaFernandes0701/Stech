@@ -101,8 +101,7 @@ These **architectural decisions enhance maintainability, scalability, and long-t
  ┣ 📜 index.html  
  ┣ 📜 package-lock.json  
  ┣ 📜 package.json  
- ┣ 📜 README.md  
- ┣ 📜 structure.txt  
+ ┣ 📜 README.md   
  ┣ 📜 vite.config.js  
 ```
 
