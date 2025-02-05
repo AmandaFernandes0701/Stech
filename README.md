@@ -1,7 +1,3 @@
-Aqui está o README atualizado, incluindo detalhes sobre a **padronização de nomenclatura**, **Styled Components**, **tema global** e **padrão de commits com Git Commitizen**.  
-
----
-
 # STech – Authentication and Dashboard System  
 
 ## Table of Contents  
@@ -153,7 +149,7 @@ To ensure **consistency, readability, and maintainability**, I followed strict *
 - **React Components**: Named using **PascalCase** (e.g., `InputField.jsx`).  
 - **Styled Components**: Follow the **same name as the component file**, keeping a **1:1 mapping** between style and component (e.g., `InputField.jsx` and `styles.js`).  
 - **Theme Variables**: Defined in `theme.js`, ensuring **consistent design system usage** across all components.  
-- **Global Styles**: Managed in `GlobalStyles.js` using **Styled Components**, enforcing uniform styling.  
+- **Global Styles**: Managed in `GlobalStyles.js` using **Styled Components**, enforcing uniform styling across the entire application.  
 
 ---
 
@@ -162,7 +158,7 @@ To ensure **consistency, readability, and maintainability**, I followed strict *
 To maintain a **clear and structured commit history**, I integrated **Git Commitizen** to enforce **Conventional Commits**.  
 
 Example commit messages:  
-```sh
+```sh  
 git commit -m "feat: add email validation to login form"
 git commit -m "fix: correct button padding issue"
 git commit -m "refactor: improve input component structure"
