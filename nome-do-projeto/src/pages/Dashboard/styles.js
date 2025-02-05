@@ -6,7 +6,6 @@ export const DashboardContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f8ff;
 `;
 
 export const DashboardTitle = styled.h2`

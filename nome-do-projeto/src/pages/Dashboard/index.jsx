@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate("/"); // Redireciona para a página de login
+    navigate("/");
   };
 
   return (
