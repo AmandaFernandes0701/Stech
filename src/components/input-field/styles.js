@@ -16,7 +16,7 @@ export const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
   margin: 10px 0;
-  background: ${theme.colors.inputBackground};
+  background: #121212;
   border: 1px solid ${theme.colors.inputBorder};
   border-radius: ${theme.borderRadius};
   font-size: ${theme.fontSizes.text};
