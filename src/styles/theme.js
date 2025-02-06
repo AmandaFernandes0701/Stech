@@ -18,6 +18,12 @@ export const theme = {
     iconColor: "#757575",
     textSecondary: "#B0B0B0",
     borderColor: "#DDDDDD",
+    sidebarBackground: "#1a1c23",
+    headerBackground: "#333",
+    attendanceBackground: "#212327",
+    attendanceCardBackground: "#37393d",
+    inputTextColor: "#fff",
+    iconButtonHover: "rgb(28, 29, 30)",
   },
   fontSizes: {
     title: "30px",
