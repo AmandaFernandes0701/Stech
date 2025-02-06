@@ -1,7 +1,7 @@
-import person1 from "C:/Meus Projetos de Programação/Stech/src/assets/person1.jpg";
-import person2 from "C:/Meus Projetos de Programação/Stech/src/assets/person2.jpg";
-import person3 from "C:/Meus Projetos de Programação/Stech/src/assets/person3.jpg";
-import person4 from "C:/Meus Projetos de Programação/Stech/src/assets/person4.jpg";
+import person1 from "../../assets/person1.jpg";
+import person2 from "../../assets/person2.jpg";
+import person3 from "../../assets/person3.jpg";
+import person4 from "../../assets/person4.jpg";
 
 export const content = [
   {
