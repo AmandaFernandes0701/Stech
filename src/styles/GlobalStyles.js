@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+
 import { theme } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
@@ -15,7 +16,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Century Gothic', sans-serif;
-    background-color: #f4f4f4;
+    background-color: ${theme.colors.background};
     margin: 0;
     padding: 0;
   }

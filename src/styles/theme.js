@@ -11,6 +11,13 @@ export const theme = {
     info: "#4a90e2",
     warning: "#f39c12",
     toastBackground: "#1c1c1c",
+    cardBackground: "#ffffff",
+    cardText: "#000000",
+    buttonHover: "#112a1d",
+    buttonTextHover: "#ddffed",
+    iconColor: "#757575",
+    textSecondary: "#B0B0B0",
+    borderColor: "#DDDDDD",
   },
   fontSizes: {
     title: "30px",

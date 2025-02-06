@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 import { theme } from "../../styles/theme";
@@ -8,13 +9,14 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 10vh;
-  height: 100vh;
+  height: 100%;
   background-color: ${theme.colors.background};
   padding: 0 5%;
 
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 20px;
+    gap: 3vh;
     height: auto;
   }
 `;
@@ -31,8 +33,6 @@ export const Form = styled.div`
 
   @media (max-width: 768px) {
     padding: 20px;
-    align-items: center;
-    text-align: center;
   }
 `;
 
@@ -41,6 +41,10 @@ export const Title = styled.h1`
 
   @media (max-width: 768px) {
     font-size: 28px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 24px;
   }
 `;
 
@@ -53,33 +57,58 @@ export const TitleTestimonial = styled.h1`
     padding-top: 15px;
   }
 
-  @media (max-width: 900px) {
-    font-size: 45px;
+  @media (max-width: 1180px) {
+    font-size: 40px;
+    padding-left: 15px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1090px) {
+    font-size: 40px;
+  }
+
+  @media (max-width: 1020px) {
     font-size: 35px;
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 768px) {
     font-size: 30px;
+    padding-bottom: 10px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 25px;
+    padding-bottom: 5px;
+    padding-left: 10px;
   }
 `;
 
 export const Subtitle = styled.p`
   font-size: ${theme.fontSizes.subtitle};
   margin: 10px 0 30px 0;
+
+  @media (max-width: 768px) {
+    font-size: ${theme.fontSizes.small};
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 export const ForgotPassword = styled.a`
   color: ${theme.colors.primary};
   text-decoration: none;
+  padding-right: 10px;
   font-size: ${theme.fontSizes.small};
   cursor: pointer;
   align-self: flex-end;
 
   &:hover {
     text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 
@@ -105,20 +134,38 @@ export const SocialLogin = styled.div`
     svg {
       font-size: 40px;
     }
+
+    @media (max-width: 768px) {
+      svg {
+        font-size: 30px;
+      }
+    }
   }
 `;
 
 export const Text = styled.p`
   font-size: ${theme.fontSizes.text};
   font-weight: 500 !important;
+
+  @media (max-width: 1020px) {
+    font-size: 12px !important;
+  }
 `;
 
 export const TextBold = styled.p`
   font-size: 22px !important;
   font-weight: bold !important;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1090px) {
     font-size: 18px !important;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px !important;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px !important;
   }
 `;
 
@@ -132,7 +179,7 @@ export const TestimonialSection = styled.div`
   color: white;
   background-color: ${theme.colors.primary};
   border-radius: 15px;
-  width: 60vh;
+  width: 75vh;
   padding: 20px;
 
   @media (max-width: 768px) {
@@ -152,17 +199,29 @@ export const TestimonialCard = styled.div`
   h2 {
     font-size: 20px;
     margin-bottom: 12px;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
   }
 
   blockquote {
     font-size: 16px;
     font-weight: 300;
     margin-bottom: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   p {
     font-size: 14px;
     font-weight: bold;
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -174,9 +233,16 @@ export const InnerCard = styled.div`
   font-size: 14px;
   font-weight: bold;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  height: auto;
 
   @media (max-width: 768px) {
     padding: 20px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 15px;
+    font-size: 10px;
   }
 `;
 
@@ -195,33 +261,53 @@ export const HeadingWrapper = styled.div`
     @media (max-width: 768px) {
       font-size: 30px;
     }
+
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
   }
 `;
 
 export const ArrowsContainer = styled.div`
   display: flex;
   gap: 10px;
-  margin-top: 70px;
+  margin-top: 50px;
   margin-bottom: 30px;
   margin-left: 20px;
 
-  @media (max-width: 768px) {
-    margin-top: 30px;
-    margin-left: 0;
+  @media (max-width: 1090px) {
+    margin-top: 20px;
+    margin-left: 0px;
     justify-content: center;
   }
 `;
 
 export const ArrowButton = styled.div`
-  background: #ddffed;
-  color: #112a1d;
-  border-radius: 8px;
+  background: ${theme.colors.cardBackground};
+  color: ${theme.colors.cardText};
+  border-radius: ${theme.borderRadius};
   padding: 6px 20px;
   cursor: pointer;
   transition: background 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background: #112a1d;
-    color: #ddffed;
+    background: ${theme.colors.buttonHover};
+    color: ${theme.colors.buttonTextHover};
+  }
+`;
+
+export const MotionDiv = styled(motion.div)`
+  padding: 50px 0px 20px 25px;
+
+  @media (max-width: 1180px) {
+    padding: 40px 0px 15px 20px;
+  }
+
+  @media (max-width: 1090px) {
+    padding: 30px 0px 10px 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 0px 5px 10px;
   }
 `;

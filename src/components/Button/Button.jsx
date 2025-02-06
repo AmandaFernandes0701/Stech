@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import { ButtonContainer, SpinnerWrapper } from "./styles";
 
 const Button = ({ onClick, loading, children }) => {
@@ -9,7 +10,9 @@ const Button = ({ onClick, loading, children }) => {
     if (loading) {
       dotInterval = setInterval(() => {
         setDots((prev) => {
-          if (prev === "...") return ".";
+          if (prev === "...") {
+            return ".";
+          }
           return prev + ".";
         });
       }, 500);
