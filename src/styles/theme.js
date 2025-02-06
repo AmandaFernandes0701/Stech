@@ -1,8 +1,8 @@
 export const theme = {
   colors: {
-    primary: "#00c896",
+    primary: "#43B17E",
     primaryDark: "#009973",
-    background: "#002b29",
+    background: "black",
     formBackground: "#101010",
     text: "white",
     inputBackground: "#1c1c1c",

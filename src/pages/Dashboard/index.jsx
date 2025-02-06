@@ -1,5 +1,6 @@
-import { DashboardContainer, DashboardTitle, LogoutButton } from "./styles";
 import { useNavigate } from "react-router-dom";
+
+import { DashboardContainer, DashboardTitle, LogoutButton } from "./styles";
 
 const Dashboard = () => {
   const navigate = useNavigate();
