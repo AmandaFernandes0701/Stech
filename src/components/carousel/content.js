@@ -1,3 +1,8 @@
+import person1 from "C:/Meus Projetos de Programação/Stech/src/assets/person1.jpg";
+import person2 from "C:/Meus Projetos de Programação/Stech/src/assets/person2.jpg";
+import person3 from "C:/Meus Projetos de Programação/Stech/src/assets/person3.jpg";
+import person4 from "C:/Meus Projetos de Programação/Stech/src/assets/person4.jpg";
+
 export const content = [
   {
     title: "Great Place to Work",
@@ -9,6 +14,7 @@ export const content = [
     ],
     name: "Amanda Fernandes",
     position: "Software Engineer at Stech",
+    image: person1,
   },
   {
     title: "A Company that Cares",
@@ -20,6 +26,7 @@ export const content = [
     ],
     name: "John Doe",
     position: "Lead Developer at TechCorp",
+    image: person2,
   },
   {
     title: "Innovative and Inclusive Workplace",
@@ -31,6 +38,7 @@ export const content = [
     ],
     name: "Jane Smith",
     position: "CTO at GlobalTech",
+    image: person3,
   },
   {
     title: "Transformative Work Environment",
@@ -42,5 +50,6 @@ export const content = [
     ],
     name: "Sam Taylor",
     position: "Product Manager at InnovateX",
+    image: person4,
   },
 ];

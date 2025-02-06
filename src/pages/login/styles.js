@@ -147,7 +147,7 @@ export const Text = styled.p`
   font-size: ${theme.fontSizes.text};
   font-weight: 500 !important;
 
-  @media (max-width: 1020px) {
+  @media (max-width: 1200px) {
     font-size: 12px !important;
   }
 `;
@@ -156,7 +156,7 @@ export const TextBold = styled.p`
   font-size: 22px !important;
   font-weight: bold !important;
 
-  @media (max-width: 1090px) {
+  @media (max-width: 1200px) {
     font-size: 18px !important;
   }
 
@@ -172,8 +172,8 @@ export const TextBold = styled.p`
 export const TestimonialSection = styled.div`
   color: white;
   background-color: ${theme.colors.primary};
-  border-radius: 15px;
-  width: 75vh;
+  border-radius: 15px 130px 130px 15px;
+  width: 85vh;
   padding: 20px;
 
   @media (max-width: 768px) {
@@ -260,32 +260,10 @@ export const HeadingWrapper = styled.div`
   }
 `;
 
-export const ArrowsContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  margin-left: 20px;
-
-  @media (max-width: 1090px) {
-    margin-top: 20px;
-    margin-left: 0px;
-    justify-content: center;
-  }
-`;
-
 export const MotionDiv = styled(motion.div)`
   padding: 50px 0px 20px 25px;
 
-  @media (max-width: 1180px) {
-    padding: 40px 0px 15px 20px;
-  }
-
-  @media (max-width: 1090px) {
-    padding: 30px 0px 10px 15px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 20px 0px 5px 10px;
+  @media (max-width: 1350px) {
+    padding: 10px 0px 10px 10px;
   }
 `;
