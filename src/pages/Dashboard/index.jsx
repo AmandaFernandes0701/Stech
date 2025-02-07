@@ -8,8 +8,25 @@ import {
   ChevronRight,
   GetApp,
   Search,
+  ExpandLess,
+  ExpandMore,
+  HomeOutlined as HomeIcon,
+  BarChartOutlined as AnalyticsIcon,
+  EventOutlined as ScheduleIcon,
+  GroupOutlined as MembersIcon,
+  NotificationsOutlined as NotificationsIcon,
+  SettingsOutlined as SettingsIcon,
+  HelpOutline as HelpIcon,
+  AssessmentOutlined as ReportsIcon,
+  TrendingUpOutlined as TrendsIcon,
+  PieChartOutlined as OverviewIcon,
+  SecurityOutlined as SecurityIcon,
+  AccountCircleOutlined as AccountIcon,
+  BuildOutlined as ToolsIcon,
+  Menu as MenuIcon,
+  Close as CloseIcon,
 } from "@mui/icons-material";
-import { IconButton, Button } from "@mui/material";
+import { IconButton, Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
@@ -20,7 +37,6 @@ import theme from "../../styles/theme";
 import {
   Container,
   Header,
-  Sidebar,
   MainContent,
   AttendanceGrid,
   AttendanceRow,
@@ -30,6 +46,16 @@ import {
   PaginationControls,
   SearchContainer,
   EmployeeCardContainer,
+  LoadingContainer,
+  SidebarContainer,
+  MenuSection,
+  SectionTitle,
+  MenuItem,
+  ItemText,
+  SubMenu,
+  NotificationBadge,
+  HamburgerMenu,
+  Overlay,
 } from "./styles";
 
 const generatePaginationNumbers = (currentPage, totalPages) => {
@@ -98,14 +124,21 @@ EmployeeCard.propTypes = {
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [open, setOpen] = useState({});
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [activeButtons, setActiveButtons] = useState([]);
   const [employee, setEmployee] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [analyticsOpen, setAnalyticsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState("");
+
   const cardsPerPage = 6;
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 681);
+      setIsSmallScreen(window.innerWidth < 768);
     };
 
     window.addEventListener("resize", handleResize);
@@ -130,11 +163,21 @@ const Dashboard = () => {
         });
       } catch (error) {
         console.error("Error fetching employee data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchEmployeeData();
   }, []);
+
+  const handleToggle = (menu) => {
+    setOpen((prev) => ({ ...prev, [menu]: !prev[menu] }));
+  };
+
+  const handleMenuItemClick = (menuItem) => {
+    setActiveMenuItem(menuItem);
+  };
 
   const attendanceData = useMemo(
     () =>
@@ -219,25 +262,362 @@ const Dashboard = () => {
     );
   };
 
+  if (loading) {
+    return (
+      <LoadingContainer>
+        <CircularProgress />
+      </LoadingContainer>
+    );
+  }
+
   return (
     <Container>
-      <Sidebar>
-        <h1>Findez</h1>
-        <nav>
-          <ul>
-            <li>Dashboard</li>
-            <li>Analytics</li>
-            <li>Schedule</li>
-            <li>Members</li>
-          </ul>
-        </nav>
-        <footer>
-          <ul>
-            <li>Settings</li>
-            <li>Help Center</li>
-          </ul>
-        </footer>
-      </Sidebar>
+      {isSmallScreen ? (
+        <>
+          <HamburgerMenu onClick={() => setSidebarOpen(!sidebarOpen)}>
+            {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
+          </HamburgerMenu>
+          {sidebarOpen && (
+            <>
+              <Overlay onClick={() => setSidebarOpen(false)} />
+              <SidebarContainer>
+                <MenuSection>
+                  <SectionTitle>Main Menu</SectionTitle>
+                  <MenuItem
+                    onClick={() => handleMenuItemClick("dashboard")}
+                    className={activeMenuItem === "dashboard" ? "active" : ""}
+                    style={{
+                      backgroundColor:
+                        activeMenuItem === "dashboard"
+                          ? theme.colors.hover
+                          : "transparent",
+                    }}
+                  >
+                    <ItemText
+                      style={{
+                        color:
+                          activeMenuItem === "dashboard"
+                            ? theme.colors.primary
+                            : "inherit",
+                      }}
+                    >
+                      <HomeIcon /> Dashboard
+                    </ItemText>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => setAnalyticsOpen(!analyticsOpen)}
+                    className={activeMenuItem === "analytics" ? "active" : ""}
+                    style={{
+                      backgroundColor:
+                        activeMenuItem === "analytics"
+                          ? theme.colors.hover
+                          : "transparent",
+                    }}
+                  >
+                    <ItemText
+                      style={{
+                        color:
+                          activeMenuItem === "analytics"
+                            ? theme.colors.primary
+                            : "inherit",
+                      }}
+                    >
+                      <AnalyticsIcon /> Analytics
+                    </ItemText>
+                    {analyticsOpen ? <ExpandLess /> : <ExpandMore />}
+                  </MenuItem>
+                  {analyticsOpen && (
+                    <SubMenu>
+                      <MenuItem>
+                        <ItemText>
+                          <ReportsIcon /> Reports
+                        </ItemText>
+                      </MenuItem>
+                      <MenuItem>
+                        <ItemText>
+                          <TrendsIcon /> Trends
+                        </ItemText>
+                      </MenuItem>
+                      <MenuItem>
+                        <ItemText>
+                          <OverviewIcon /> Overview
+                        </ItemText>
+                      </MenuItem>
+                      <MenuItem>
+                        <ItemText>
+                          <ScheduleIcon /> Schedules
+                        </ItemText>
+                      </MenuItem>
+                    </SubMenu>
+                  )}
+                  <MenuItem
+                    onClick={() => handleMenuItemClick("members")}
+                    className={activeMenuItem === "members" ? "active" : ""}
+                    style={{
+                      backgroundColor:
+                        activeMenuItem === "members"
+                          ? theme.colors.hover
+                          : "transparent",
+                    }}
+                  >
+                    <ItemText
+                      style={{
+                        color:
+                          activeMenuItem === "members"
+                            ? theme.colors.primary
+                            : "inherit",
+                      }}
+                    >
+                      <MembersIcon /> Members
+                    </ItemText>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleMenuItemClick("notifications")}
+                    className={
+                      activeMenuItem === "notifications" ? "active" : ""
+                    }
+                    style={{
+                      backgroundColor:
+                        activeMenuItem === "notifications"
+                          ? theme.colors.hover
+                          : "transparent",
+                    }}
+                  >
+                    <ItemText
+                      style={{
+                        color:
+                          activeMenuItem === "notifications"
+                            ? theme.colors.primary
+                            : "inherit",
+                      }}
+                    >
+                      <NotificationsIcon /> Notifications
+                    </ItemText>
+                    <NotificationBadge>8</NotificationBadge>
+                  </MenuItem>
+                </MenuSection>
+
+                <MenuSection>
+                  <SectionTitle>Settings</SectionTitle>
+                  <MenuItem
+                    onClick={() => setSettingsOpen(!settingsOpen)}
+                    className={activeMenuItem === "settings" ? "active" : ""}
+                    style={{
+                      backgroundColor:
+                        activeMenuItem === "settings"
+                          ? theme.colors.hover
+                          : "transparent",
+                    }}
+                  >
+                    <ItemText
+                      style={{
+                        color:
+                          activeMenuItem === "settings"
+                            ? theme.colors.primary
+                            : "inherit",
+                      }}
+                    >
+                      <SettingsIcon /> Settings
+                    </ItemText>
+                    {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+                  </MenuItem>
+                  {settingsOpen && (
+                    <SubMenu>
+                      <MenuItem>
+                        <ItemText>
+                          <SecurityIcon /> Security
+                        </ItemText>
+                      </MenuItem>
+                      <MenuItem>
+                        <ItemText>
+                          <AccountIcon /> Account
+                        </ItemText>
+                      </MenuItem>
+                      <MenuItem>
+                        <ItemText>
+                          <ToolsIcon /> Tools
+                        </ItemText>
+                      </MenuItem>
+                      <MenuItem>
+                        <ItemText>
+                          <HelpIcon /> Help Center
+                        </ItemText>
+                      </MenuItem>
+                    </SubMenu>
+                  )}
+                </MenuSection>
+              </SidebarContainer>
+            </>
+          )}
+        </>
+      ) : (
+        <SidebarContainer>
+          <MenuSection>
+            <SectionTitle>Main Menu</SectionTitle>
+            <MenuItem
+              onClick={() => handleMenuItemClick("dashboard")}
+              className={activeMenuItem === "dashboard" ? "active" : ""}
+              style={{
+                backgroundColor:
+                  activeMenuItem === "dashboard"
+                    ? theme.colors.hover
+                    : "transparent",
+              }}
+            >
+              <ItemText
+                style={{
+                  color:
+                    activeMenuItem === "dashboard"
+                      ? theme.colors.primary
+                      : "inherit",
+                }}
+              >
+                <HomeIcon /> Dashboard
+              </ItemText>
+            </MenuItem>
+            <MenuItem
+              onClick={() => setAnalyticsOpen(!analyticsOpen)}
+              className={activeMenuItem === "analytics" ? "active" : ""}
+              style={{
+                backgroundColor:
+                  activeMenuItem === "analytics"
+                    ? theme.colors.hover
+                    : "transparent",
+              }}
+            >
+              <ItemText
+                style={{
+                  color:
+                    activeMenuItem === "analytics"
+                      ? theme.colors.primary
+                      : "inherit",
+                }}
+              >
+                <AnalyticsIcon /> Analytics
+              </ItemText>
+              {analyticsOpen ? <ExpandLess /> : <ExpandMore />}
+            </MenuItem>
+            {analyticsOpen && (
+              <SubMenu>
+                <MenuItem>
+                  <ItemText>
+                    <ReportsIcon /> Reports
+                  </ItemText>
+                </MenuItem>
+                <MenuItem>
+                  <ItemText>
+                    <TrendsIcon /> Trends
+                  </ItemText>
+                </MenuItem>
+                <MenuItem>
+                  <ItemText>
+                    <OverviewIcon /> Overview
+                  </ItemText>
+                </MenuItem>
+                <MenuItem>
+                  <ItemText>
+                    <ScheduleIcon /> Schedules
+                  </ItemText>
+                </MenuItem>
+              </SubMenu>
+            )}
+            <MenuItem
+              onClick={() => handleMenuItemClick("members")}
+              className={activeMenuItem === "members" ? "active" : ""}
+              style={{
+                backgroundColor:
+                  activeMenuItem === "members"
+                    ? theme.colors.hover
+                    : "transparent",
+              }}
+            >
+              <ItemText
+                style={{
+                  color:
+                    activeMenuItem === "members"
+                      ? theme.colors.primary
+                      : "inherit",
+                }}
+              >
+                <MembersIcon /> Members
+              </ItemText>
+            </MenuItem>
+            <MenuItem
+              onClick={() => handleMenuItemClick("notifications")}
+              className={activeMenuItem === "notifications" ? "active" : ""}
+              style={{
+                backgroundColor:
+                  activeMenuItem === "notifications"
+                    ? theme.colors.hover
+                    : "transparent",
+              }}
+            >
+              <ItemText
+                style={{
+                  color:
+                    activeMenuItem === "notifications"
+                      ? theme.colors.primary
+                      : "inherit",
+                }}
+              >
+                <NotificationsIcon /> Notifications
+              </ItemText>
+              <NotificationBadge>8</NotificationBadge>
+            </MenuItem>
+          </MenuSection>
+
+          <MenuSection>
+            <SectionTitle>Settings</SectionTitle>
+            <MenuItem
+              onClick={() => setSettingsOpen(!settingsOpen)}
+              className={activeMenuItem === "settings" ? "active" : ""}
+              style={{
+                backgroundColor:
+                  activeMenuItem === "settings"
+                    ? theme.colors.hover
+                    : "transparent",
+              }}
+            >
+              <ItemText
+                style={{
+                  color:
+                    activeMenuItem === "settings"
+                      ? theme.colors.primary
+                      : "inherit",
+                }}
+              >
+                <SettingsIcon /> Settings
+              </ItemText>
+              {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+            </MenuItem>
+            {settingsOpen && (
+              <SubMenu>
+                <MenuItem>
+                  <ItemText>
+                    <SecurityIcon /> Security
+                  </ItemText>
+                </MenuItem>
+                <MenuItem>
+                  <ItemText>
+                    <AccountIcon /> Account
+                  </ItemText>
+                </MenuItem>
+                <MenuItem>
+                  <ItemText>
+                    <ToolsIcon /> Tools
+                  </ItemText>
+                </MenuItem>
+                <MenuItem>
+                  <ItemText>
+                    <HelpIcon /> Help Center
+                  </ItemText>
+                </MenuItem>
+              </SubMenu>
+            )}
+          </MenuSection>
+        </SidebarContainer>
+      )}
+
       <MainContent>
         <SearchContainer>
           <Search className="search-icon" />

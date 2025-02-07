@@ -10,42 +10,6 @@ export const Container = styled.div`
   }
 `;
 
-export const Sidebar = styled.aside`
-  background: ${theme.colors.sidebarBackground};
-  color: ${theme.colors.text};
-  width: 20%;
-  padding: 20px;
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  nav ul,
-  footer ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  nav ul li,
-  footer ul li {
-    margin: 15px 0;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 10px;
-
-    h1 {
-      font-size: 1.2rem;
-    }
-
-    nav ul li,
-    footer ul li {
-      margin: 10px 0;
-    }
-  }
-`;
-
 export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -545,6 +509,10 @@ export const EmployeeCardContainer = styled.div`
     border-radius: 50%;
     margin-right: 20px;
     object-fit: cover;
+
+    @media (max-width: 681px) {
+      margin-right: 0px;
+    }
   }
 
   .employee-details {
@@ -640,4 +608,111 @@ export const EmployeeCardContainer = styled.div`
       }
     }
   }
+`;
+
+export const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: ${theme.colors.formBackground};
+  color: ${theme.colors.text};
+  font-size: ${theme.fontSizes.title};
+`;
+
+export const SidebarContainer = styled.div`
+  width: 250px;
+  background: #181818;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    left: ${(props) => (props.isOpen ? "0" : "-250px")};
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+`;
+
+export const MenuSection = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const SectionTitle = styled.h3`
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+`;
+
+export const MenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  &:hover {
+    background: #222;
+  }
+
+  &.active {
+    background: ${theme.colors.primary};
+    color: ${theme.colors.text};
+
+    svg {
+      color: ${theme.colors.primary};
+    }
+  }
+`;
+
+export const ItemText = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const SubMenu = styled.div`
+  padding-left: 30px;
+`;
+
+export const NotificationBadge = styled.span`
+  background: gray;
+  color: white;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 12px;
+`;
+
+export const HamburgerMenu = styled.div`
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+
+  span {
+    display: block;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
