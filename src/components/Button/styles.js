@@ -15,6 +15,7 @@ export const ButtonContainer = styled.button`
   margin-top: 20px;
   cursor: ${(props) => (props.loading ? "not-allowed" : "pointer")};
   transition: background-color 0.3s ease;
+  height: 40px;
 
   &:hover {
     background-color: #2c6a53;

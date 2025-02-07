@@ -1,10 +1,27 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { theme } from "../../styles/theme";
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -51,6 +68,7 @@ export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100vh;
   background: ${theme.colors.formBackground};
   padding: 20px;
 
@@ -60,14 +78,81 @@ export const MainContent = styled.div`
 `;
 
 export const Header = styled.header`
-  background: ${theme.colors.headerBackground};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 16px 0px 30px;
   color: ${theme.colors.text};
-  padding: 10px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  position: relative;
   border-radius: 8px;
 
-  @media (max-width: 768px) {
-    padding: 8px;
-    font-size: ${theme.fontSizes.small};
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background-color: ${theme.colors.primary};
+    border-radius: 8px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    select {
+      padding: 5px 10px;
+      border-radius: ${theme.borderRadius};
+      border: 1px solid ${theme.colors.inputBorder};
+      background-color: ${theme.colors.inputBackground};
+      color: ${theme.colors.text};
+      font-size: ${theme.fontSizes.text};
+      height: 38px;
+
+      &:focus {
+        border-color: ${theme.colors.primary};
+        outline: none;
+      }
+    }
+
+    .download-button {
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      background-color: ${theme.colors.primary};
+      color: ${theme.colors.text};
+      border: none;
+      border-radius: ${theme.borderRadius};
+      cursor: pointer;
+      transition: background-color 0.3s;
+      height: 35px;
+      font-weight: 600;
+      text-transform: none;
+
+      &:hover {
+        background-color: ${theme.colors.primaryDark};
+      }
+
+      .MuiSvgIcon-root {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (max-width: 680px) {
+    font-size: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .header-right {
+      margin-top: 10px;
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 `;
 
@@ -151,6 +236,11 @@ export const AttendanceCard = styled.div`
   box-shadow: ${theme.boxShadow};
   padding: 30px;
   width: 100%;
+  animation: ${fadeIn} 0.5s ease-in-out;
+
+  &.fade-out {
+    animation: ${fadeOut} 0.5s ease-in-out;
+  }
 
   .attendance-header {
     display: flex;
@@ -303,7 +393,7 @@ export const Controls = styled.div`
 
   .icon-button {
     color: #b0b0b0;
-    transition: color 0.2s;
+    transition: color 0.2s, background-color 0.4s;
     border: 1px solid #3a3a3a;
     border-radius: 8px;
     padding: 6px 12px;
@@ -311,6 +401,11 @@ export const Controls = styled.div`
     &:hover {
       color: #fff;
       background-color: ${theme.colors.iconButtonHover};
+    }
+
+    &.active {
+      color: #fff;
+      background-color: ${theme.colors.attendanceCardBackground};
     }
   }
 
@@ -334,6 +429,110 @@ export const Controls = styled.div`
 
     .icon-button .MuiButton-label > span:not(.MuiButton-startIcon) {
       display: none;
+    }
+  }
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 250px;
+
+  input {
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: ${theme.borderRadius};
+    border: 1px solid ${theme.colors.inputBorder};
+    background-color: ${theme.colors.inputBackground};
+    color: ${theme.colors.text};
+    font-size: ${theme.fontSizes.text};
+    height: 35px;
+    padding-left: 40px;
+
+    &:focus {
+      border-color: ${theme.colors.primary};
+      outline: none;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    margin-left: 10px;
+    color: ${theme.colors.iconColor};
+  }
+`;
+
+export const EmployeeCardContainer = styled.div`
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+
+  .employee-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+  }
+
+  .employee-details {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    height: 100%;
+    justify-content: space-between;
+    align-items: space-between;
+
+    .employee-name {
+      font-size: ${theme.fontSizes.title};
+      font-weight: normal;
+      color: ${theme.colors.text};
+      margin-bottom: 10px;
+
+      @media (max-width: 768px) {
+        font-size: 22px;
+      }
+    }
+
+    .employee-info {
+      display: flex;
+      gap: 3.5rem;
+
+      .info-column {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .info-item {
+          font-size: ${theme.fontSizes.text};
+          color: ${theme.colors.text};
+          font-weight: normal;
+        }
+
+        .info-label {
+          font-size: ${theme.fontSizes.text};
+          color: ${theme.colors.textSecondary};
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .employee-photo {
+      margin-bottom: 15px;
+    }
+
+    .employee-details {
+      align-items: flex-start;
+
+      .employee-info {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   }
 `;

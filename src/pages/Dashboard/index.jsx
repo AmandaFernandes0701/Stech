@@ -6,11 +6,14 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight,
+  GetApp,
+  Search,
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
 
+import person1 from "../../assets/person1.jpg";
 import theme from "../../styles/theme";
 
 import {
@@ -18,13 +21,14 @@ import {
   Header,
   Sidebar,
   MainContent,
-  Card,
   AttendanceGrid,
   AttendanceRow,
   AttendanceCard,
   AttendanceHeader,
   Controls,
   PaginationControls,
+  SearchContainer,
+  EmployeeCardContainer,
 } from "./styles";
 
 const generatePaginationNumbers = (currentPage, totalPages) => {
@@ -59,33 +63,43 @@ const formatDate = (date) => {
 };
 
 const EmployeeCard = ({ employee }) => (
-  <Card>
-    <div className="employee-info">
-      <img src="profile.png" alt="Profile" />
-      <h3>{employee.name}</h3>
-      <p>{employee.position}</p>
+  <EmployeeCardContainer>
+    <img src={person1} alt="Profile" className="employee-photo" />
+    <div className="employee-details">
+      <div className="employee-name">{employee.name}</div>
+      <div className="employee-info">
+        <div className="info-column">
+          <div className="info-label">Role:</div>
+          <div className="info-item">{employee.position}</div>
+        </div>
+        <div className="info-column">
+          <div className="info-label">Phone:</div>
+          <div className="info-item">{employee.phone}</div>
+        </div>
+        <div className="info-column">
+          <div className="info-label">Email Address:</div>
+          <div className="info-item">{employee.email}</div>
+        </div>
+      </div>
     </div>
-    <div className="employee-stats">
-      <p>Total Attendance: {employee.totalAttendance}</p>
-      <p>Avg Check-In Time: {employee.avgCheckIn}</p>
-      <p>Avg Check-Out Time: {employee.avgCheckOut}</p>
-    </div>
-  </Card>
+  </EmployeeCardContainer>
 );
 
 EmployeeCard.propTypes = {
   employee: PropTypes.shape({
     name: PropTypes.string.isRequired,
     position: PropTypes.string.isRequired,
-    totalAttendance: PropTypes.number.isRequired,
-    avgCheckIn: PropTypes.string.isRequired,
-    avgCheckOut: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
   }).isRequired,
 };
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [fadeIn, setFadeIn] = useState(true);
+  const [activeButtons, setActiveButtons] = useState([]);
   const cardsPerPage = 6;
 
   useEffect(() => {
@@ -158,14 +172,46 @@ const Dashboard = () => {
 
   const handleNextPage = () => {
     if (currentPage * cardsPerPage < sortedAttendanceData.length) {
-      setCurrentPage(currentPage + 1);
+      setFadeOut(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage + 1);
+        setFadeOut(false);
+        setFadeIn(true);
+        setTimeout(() => setFadeIn(false), 500);
+      }, 500);
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setFadeOut(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage - 1);
+        setFadeOut(false);
+        setFadeIn(true);
+        setTimeout(() => setFadeIn(false), 500);
+      }, 500);
     }
+  };
+
+  const handlePageClick = (pageNumber) => {
+    if (currentPage !== pageNumber) {
+      setFadeOut(true);
+      setTimeout(() => {
+        setCurrentPage(pageNumber);
+        setFadeOut(false);
+        setFadeIn(true);
+        setTimeout(() => setFadeIn(false), 500);
+      }, 500);
+    }
+  };
+
+  const handleFilterButtonClick = (buttonName) => {
+    setActiveButtons((prev) =>
+      prev.includes(buttonName)
+        ? prev.filter((name) => name !== buttonName)
+        : [...prev, buttonName]
+    );
   };
 
   return (
@@ -188,34 +234,75 @@ const Dashboard = () => {
         </footer>
       </Sidebar>
       <MainContent>
-        <Header>
-          <h2>Employee Details</h2>
-        </Header>
-
-        <EmployeeCard
-          employee={{
-            name: "Natashia Khaleira",
-            position: "Head of UX Design",
-            totalAttendance: 309,
-            avgCheckIn: "08:46",
-            avgCheckOut: "17:04",
-          }}
-        />
+        <SearchContainer>
+          <Search className="search-icon" />
+          <input type="text" placeholder="Search here..." />
+        </SearchContainer>
+        <AttendanceGrid>
+          <Header>
+            <p>Employee Details</p>
+            <div className="header-right">
+              <select defaultValue="2025">
+                <option value="2025">This Year</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+              </select>
+              <Button className="download-button" startIcon={<GetApp />}>
+                Download Info
+              </Button>
+            </div>
+          </Header>
+          <EmployeeCard
+            employee={{
+              name: "Amanda Fernandes Alves",
+              position: "Staff Software Engineer",
+              phone: "(123) 456-7890",
+              email: "amanda.fernandes@example.com",
+            }}
+          />
+        </AttendanceGrid>
 
         <AttendanceGrid>
           <AttendanceHeader>
             <p>Attendance History</p>
             <Controls>
-              <IconButton className="icon-button">
+              <IconButton
+                className={`icon-button ${
+                  activeButtons.includes("viewModule") ? "active" : ""
+                }`}
+                onClick={() => handleFilterButtonClick("viewModule")}
+              >
                 <ViewModule />
               </IconButton>
-              <IconButton className="icon-button">
+              <IconButton
+                className={`icon-button ${
+                  activeButtons.includes("menu") ? "active" : ""
+                }`}
+                onClick={() => handleFilterButtonClick("menu")}
+              >
                 <Menu />
               </IconButton>
-              <Button className="icon-button" startIcon={<SwapVert />}>
+              <Button
+                className={`icon-button ${
+                  activeButtons.includes("sort") ? "active" : ""
+                }`}
+                startIcon={<SwapVert />}
+                onClick={() => handleFilterButtonClick("sort")}
+              >
                 {!isSmallScreen && "Sort"}
               </Button>
-              <Button className="icon-button" startIcon={<FilterList />}>
+              <Button
+                className={`icon-button ${
+                  activeButtons.includes("filter") ? "active" : ""
+                }`}
+                startIcon={<FilterList />}
+                onClick={() => handleFilterButtonClick("filter")}
+              >
                 {!isSmallScreen && "Filter"}
               </Button>
             </Controls>
@@ -224,6 +311,9 @@ const Dashboard = () => {
             {currentCards.map((card, index) => (
               <AttendanceCard
                 key={index}
+                className={`${fadeOut ? "fade-out" : ""} ${
+                  fadeIn ? "fade-in" : ""
+                }`}
                 color={card.status.color}
                 backgroundColor={card.status.backgroundColor}
               >
@@ -266,7 +356,7 @@ const Dashboard = () => {
                   className={`pagination-button ${
                     currentPage === number ? "active" : ""
                   }`}
-                  onClick={() => setCurrentPage(number)}
+                  onClick={() => handlePageClick(number)}
                   disabled={currentPage === number}
                 >
                   {number}
