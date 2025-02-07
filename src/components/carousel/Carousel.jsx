@@ -4,9 +4,11 @@ import { useState } from "react";
 
 import { Text, TextBold, MotionDiv } from "../../pages/login/styles";
 
+import { useCarouselContent } from "./content";
 import { ArrowsContainer, ArrowButton, WhiteCard, InnerCard } from "./styles";
 
-const Carousel = ({ slides }) => {
+const Carousel = () => {
+  const slides = useCarouselContent();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const handlePrevSlide = () => {
@@ -16,6 +18,10 @@ const Carousel = ({ slides }) => {
   const handleNextSlide = () => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
+
+  if (slides.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <WhiteCard>

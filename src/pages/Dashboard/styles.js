@@ -190,6 +190,17 @@ export const Card = styled.div`
   box-shadow: ${theme.boxShadow};
   padding: 20px;
   margin-top: 20px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(1.05) translate(0, 0);
+    transition: transform 0.2s ease;
+  }
 
   .employee-info {
     display: flex;
@@ -281,6 +292,18 @@ export const AttendanceCard = styled.div`
   box-shadow: ${theme.boxShadow};
   padding: 20px;
   width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(1.05) translate(0, 0);
+    transition: transform 0.2s ease;
+  }
 
   .attendance-header {
     display: flex;

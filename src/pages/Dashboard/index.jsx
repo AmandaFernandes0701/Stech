@@ -10,10 +10,11 @@ import {
   Search,
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
+import axios from "axios";
 import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
+import Draggable from "react-draggable";
 
-import person1 from "../../assets/person1.jpg";
 import theme from "../../styles/theme";
 
 import {
@@ -64,7 +65,7 @@ const formatDate = (date) => {
 
 const EmployeeCard = ({ employee }) => (
   <EmployeeCardContainer>
-    <img src={person1} alt="Profile" className="employee-photo" />
+    <img src={employee.photo} alt="Profile" className="employee-photo" />
     <div className="employee-details">
       <div className="employee-name">{employee.name}</div>
       <div className="employee-info">
@@ -91,6 +92,7 @@ EmployeeCard.propTypes = {
     position: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
   }).isRequired,
 };
 
@@ -98,6 +100,7 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [activeButtons, setActiveButtons] = useState([]);
+  const [employee, setEmployee] = useState(null);
   const cardsPerPage = 6;
 
   useEffect(() => {
@@ -109,6 +112,28 @@ const Dashboard = () => {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchEmployeeData = async () => {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users/1"
+        );
+        const userData = response.data;
+        setEmployee({
+          name: userData.name,
+          position: userData.company.bs,
+          phone: userData.phone,
+          email: userData.email,
+          photo: `https://i.pravatar.cc/150?img=${userData.id}`,
+        });
+      } catch (error) {
+        console.error("Error fetching employee data:", error);
+      }
+    };
+
+    fetchEmployeeData();
   }, []);
 
   const attendanceData = useMemo(
@@ -237,14 +262,7 @@ const Dashboard = () => {
               </Button>
             </div>
           </Header>
-          <EmployeeCard
-            employee={{
-              name: "Amanda Fernandes Alves",
-              position: "Staff Software Engineer",
-              phone: "(123) 456-7890",
-              email: "amanda.fernandes@example.com",
-            }}
-          />
+          {employee && <EmployeeCard employee={employee} />}
         </AttendanceGrid>
 
         <AttendanceGrid>
@@ -289,29 +307,38 @@ const Dashboard = () => {
           </AttendanceHeader>
           <AttendanceRow>
             {currentCards.map((card, index) => (
-              <AttendanceCard
+              <Draggable
                 key={index}
-                color={card.status.color}
-                backgroundColor={card.status.backgroundColor}
+                position={{ x: 0, y: 0 }}
+                bounds={{ top: -60, left: -60, right: 60, bottom: 60 }}
+                onStop={(e, data) => {
+                  data.node.style.transition = "transform 0.5s ease";
+                }}
               >
-                <div className="attendance-header">
-                  <div className="header-left">
-                    <AccessTime />
-                    <p>{formatDate(card.date)}</p>
+                <AttendanceCard
+                  id={`attendance-card-${index}`}
+                  color={card.status.color}
+                  backgroundColor={card.status.backgroundColor}
+                >
+                  <div className="attendance-header">
+                    <div className="header-left">
+                      <AccessTime />
+                      <p>{formatDate(card.date)}</p>
+                    </div>
+                    <span className="status-flag">{card.status.text}</span>
                   </div>
-                  <span className="status-flag">{card.status.text}</span>
-                </div>
-                <div className="attendance-times">
-                  <div>
-                    <p>Check-In</p>
-                    <p>{card.checkIn}</p>
+                  <div className="attendance-times">
+                    <div>
+                      <p>Check-In</p>
+                      <p>{card.checkIn}</p>
+                    </div>
+                    <div>
+                      <p>Check-Out</p>
+                      <p>{card.checkOut}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p>Check-Out</p>
-                    <p>{card.checkOut}</p>
-                  </div>
-                </div>
-              </AttendanceCard>
+                </AttendanceCard>
+              </Draggable>
             ))}
           </AttendanceRow>
           <PaginationControls>

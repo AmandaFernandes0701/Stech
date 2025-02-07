@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../../components/button/Button";
 import Carousel from "../../components/carousel/Carousel";
-import { content } from "../../components/carousel/content";
+import { useCarouselContent } from "../../components/carousel/content";
 import InputField from "../../components/input-field/InputField";
 import { validateEmail, validatePassword } from "../../utils/validation";
 
@@ -124,7 +124,7 @@ const Login = () => {
             <Text>Just browse a job and apply if you need to.</Text>
           </MotionDiv>
 
-          <Carousel slides={content} />
+          <Carousel slides={useCarouselContent} />
         </TestimonialCard>
       </TestimonialSection>
     </Container>
