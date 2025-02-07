@@ -23,7 +23,7 @@ export const theme = {
     attendanceBackground: "#212327",
     attendanceCardBackground: "#37393d",
     inputTextColor: "#fff",
-    iconButtonHover: "rgb(28, 29, 30)",
+    iconButtonHover: "#2A2C30",
   },
   fontSizes: {
     title: "30px",

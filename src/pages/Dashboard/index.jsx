@@ -1,7 +1,15 @@
-import { AccessTime } from "@mui/icons-material";
-import { SwapVert, FilterList, ViewModule, Menu } from "@mui/icons-material";
+import {
+  AccessTime,
+  SwapVert,
+  FilterList,
+  ViewModule,
+  Menu,
+  ChevronLeft,
+  ChevronRight,
+} from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
-import { useState } from "react";
+import PropTypes from "prop-types";
+import { useState, useMemo } from "react";
 
 import {
   Container,
@@ -14,24 +22,87 @@ import {
   AttendanceCard,
   AttendanceHeader,
   Controls,
+  PaginationControls,
 } from "./styles";
 
+const generatePaginationNumbers = (currentPage, totalPages) => {
+  const paginationNumbers = [1];
+
+  if (currentPage > 3) {
+    paginationNumbers.push("...");
+  }
+
+  for (
+    let i = Math.max(2, currentPage - 1);
+    i <= Math.min(currentPage + 1, totalPages - 1);
+    i++
+  ) {
+    paginationNumbers.push(i);
+  }
+
+  if (currentPage < totalPages - 2) {
+    paginationNumbers.push("...");
+  }
+
+  if (totalPages > 1) {
+    paginationNumbers.push(totalPages);
+  }
+
+  return paginationNumbers;
+};
+
+const EmployeeCard = ({ employee }) => (
+  <Card>
+    <div className="employee-info">
+      <img src="profile.png" alt="Profile" />
+      <h3>{employee.name}</h3>
+      <p>{employee.position}</p>
+    </div>
+    <div className="employee-stats">
+      <p>Total Attendance: {employee.totalAttendance}</p>
+      <p>Avg Check-In Time: {employee.avgCheckIn}</p>
+      <p>Avg Check-Out Time: {employee.avgCheckOut}</p>
+    </div>
+  </Card>
+);
+
+EmployeeCard.propTypes = {
+  employee: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    totalAttendance: PropTypes.number.isRequired,
+    avgCheckIn: PropTypes.string.isRequired,
+    avgCheckOut: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 const Dashboard = () => {
-  const attendanceData = Array(24)
-    .fill({
-      date: "March 8, 2023",
-      checkIn: "08:53",
-      checkOut: "17:15",
-    })
-    .map((item, index) => ({
-      ...item,
-      date: new Date(2023, 2, 8 + index),
-    }));
-
-  const sortedAttendanceData = attendanceData.sort((a, b) => a.date - b.date);
-
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
+
+  const attendanceData = useMemo(
+    () =>
+      Array(50)
+        .fill({ date: "March 8, 2023", checkIn: "08:53", checkOut: "17:15" })
+        .map((item, index) => ({
+          ...item,
+          date: new Date(2023, 2, 8 + index),
+        })),
+    []
+  );
+
+  const sortedAttendanceData = useMemo(
+    () => attendanceData.sort((a, b) => a.date - b.date),
+    [attendanceData]
+  );
+  const totalPages = useMemo(
+    () => Math.ceil(sortedAttendanceData.length / cardsPerPage),
+    [sortedAttendanceData.length, cardsPerPage]
+  );
+  const paginationNumbers = useMemo(
+    () => generatePaginationNumbers(currentPage, totalPages),
+    [currentPage, totalPages]
+  );
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentCards = sortedAttendanceData.slice(
@@ -74,18 +145,16 @@ const Dashboard = () => {
         <Header>
           <h2>Employee Details</h2>
         </Header>
-        <Card>
-          <div className="employee-info">
-            <img src="profile.png" alt="Profile" />
-            <h3>Natashia Khaleira</h3>
-            <p>Head of UX Design</p>
-          </div>
-          <div className="employee-stats">
-            <p>Total Attendance: 309</p>
-            <p>Avg Check-In Time: 08:46</p>
-            <p>Avg Check-Out Time: 17:04</p>
-          </div>
-        </Card>
+
+        <EmployeeCard
+          employee={{
+            name: "Natashia Khaleira",
+            position: "Head of UX Design",
+            totalAttendance: 309,
+            avgCheckIn: "08:46",
+            avgCheckOut: "17:04",
+          }}
+        />
 
         <AttendanceGrid>
           <AttendanceHeader>
@@ -105,7 +174,6 @@ const Dashboard = () => {
               </Button>
             </Controls>
           </AttendanceHeader>
-
           <AttendanceRow>
             {currentCards.map((card, index) => (
               <AttendanceCard key={index}>
@@ -126,20 +194,40 @@ const Dashboard = () => {
               </AttendanceCard>
             ))}
           </AttendanceRow>
-
-          <div className="pagination-controls">
-            <Button onClick={handlePrevPage} disabled={currentPage === 1}>
-              Prev
-            </Button>
+          <PaginationControls>
             <Button
-              onClick={handleNextPage}
-              disabled={
-                currentPage * cardsPerPage >= sortedAttendanceData.length
-              }
+              className="pagination-button"
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
             >
-              Next
+              <ChevronLeft fontSize="small" />
             </Button>
-          </div>
+            {paginationNumbers.map((number, index) =>
+              number === "..." ? (
+                <span key={index} className="pagination-ellipsis">
+                  {number}
+                </span>
+              ) : (
+                <Button
+                  key={index}
+                  className={`pagination-button ${
+                    currentPage === number ? "active" : ""
+                  }`}
+                  onClick={() => setCurrentPage(number)}
+                  disabled={currentPage === number}
+                >
+                  {number}
+                </Button>
+              )
+            )}
+            <Button
+              className="pagination-button"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              <ChevronRight fontSize="small" />
+            </Button>
+          </PaginationControls>
         </AttendanceGrid>
       </MainContent>
     </Container>

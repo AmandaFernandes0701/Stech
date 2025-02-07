@@ -30,8 +30,10 @@ export const Sidebar = styled.aside`
 `;
 
 export const MainContent = styled.div`
-  background: ${theme.colors.formBackground};
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  background: ${theme.colors.formBackground};
   padding: 20px;
 `;
 
@@ -63,18 +65,19 @@ export const Card = styled.div`
 export const AttendanceGrid = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
   background-color: ${theme.colors.attendanceBackground};
   color: ${theme.colors.text};
   padding: 20px;
   border-radius: 30px;
-  gap: 20px;
+  gap: 1.5rem;
   margin-top: 20px;
 `;
 
 export const AttendanceRow = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.3rem;
   width: 100%;
 `;
 
@@ -82,8 +85,8 @@ export const AttendanceHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px 12px 25px;
-  border-radius: 8px;
+  padding: 0px 16px 0px 25px;
+  margin-bottom: 20px;
   color: ${theme.colors.text};
   font-size: 1.2rem;
   font-weight: 600;
@@ -95,10 +98,9 @@ export const AttendanceHeader = styled.div`
     left: 0;
     top: 0;
     bottom: 0;
-    width: 8px;
+    width: 10px;
     background-color: ${theme.colors.primary};
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-radius: 8px;
   }
 `;
 
@@ -122,7 +124,7 @@ export const Controls = styled.div`
 
 export const AttendanceCard = styled.div`
   background: ${theme.colors.attendanceCardBackground};
-  border-radius: 30px;
+  border-radius: 25px;
   box-shadow: ${theme.boxShadow};
   padding: 30px;
   width: 100%;
@@ -158,5 +160,57 @@ export const AttendanceCard = styled.div`
         margin-top: 5px;
       }
     }
+  }
+`;
+
+export const PaginationControls = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+
+  .pagination-button {
+    color: #b0b0b0;
+    background-color: transparent;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #fff;
+      background-color: ${theme.colors.iconButtonHover};
+    }
+
+    &:disabled {
+      color: #666;
+      background-color: #333;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      color: #fff;
+      background-color: ${theme.colors.primary};
+      border-color: ${theme.colors.primary};
+    }
+  }
+
+  .pagination-ellipsis {
+    color: #b0b0b0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
   }
 `;
