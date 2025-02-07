@@ -34,3 +34,5 @@ export const theme = {
   borderRadius: "8px",
   boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.3)",
 };
+
+export default theme;

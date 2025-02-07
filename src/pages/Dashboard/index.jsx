@@ -9,7 +9,9 @@ import {
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+
+import theme from "../../styles/theme";
 
 import {
   Container,
@@ -51,6 +53,11 @@ const generatePaginationNumbers = (currentPage, totalPages) => {
   return paginationNumbers;
 };
 
+const formatDate = (date) => {
+  const options = { year: "numeric", month: "long", day: "2-digit" };
+  return date.toLocaleDateString("en-US", options).replace(",", ",");
+};
+
 const EmployeeCard = ({ employee }) => (
   <Card>
     <div className="employee-info">
@@ -78,7 +85,19 @@ EmployeeCard.propTypes = {
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const cardsPerPage = 6;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 681);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const attendanceData = useMemo(
     () =>
@@ -87,6 +106,33 @@ const Dashboard = () => {
         .map((item, index) => ({
           ...item,
           date: new Date(2023, 2, 8 + index),
+          status: [
+            {
+              text: "On Time",
+              color: theme.colors.primary,
+              backgroundColor: "rgba(67, 177, 126, 0.15)",
+            },
+            {
+              text: "Late",
+              color: theme.colors.warning,
+              backgroundColor: "rgba(243, 156, 18, 0.15)",
+            },
+            {
+              text: "Absent",
+              color: theme.colors.error,
+              backgroundColor: "rgba(255, 77, 77, 0.15)",
+            },
+            {
+              text: "Early",
+              color: theme.colors.info,
+              backgroundColor: "rgba(74, 144, 226, 0.15)",
+            },
+            {
+              text: "Overtime",
+              color: "#b015ed",
+              backgroundColor: "rgba(176, 21, 237, 0.15)",
+            },
+          ][index % 5],
         })),
     []
   );
@@ -167,19 +213,26 @@ const Dashboard = () => {
                 <Menu />
               </IconButton>
               <Button className="icon-button" startIcon={<SwapVert />}>
-                Sort
+                {!isSmallScreen && "Sort"}
               </Button>
               <Button className="icon-button" startIcon={<FilterList />}>
-                Filter
+                {!isSmallScreen && "Filter"}
               </Button>
             </Controls>
           </AttendanceHeader>
           <AttendanceRow>
             {currentCards.map((card, index) => (
-              <AttendanceCard key={index}>
+              <AttendanceCard
+                key={index}
+                color={card.status.color}
+                backgroundColor={card.status.backgroundColor}
+              >
                 <div className="attendance-header">
-                  <AccessTime />
-                  <p>{card.date.toLocaleDateString()}</p>
+                  <div className="header-left">
+                    <AccessTime />
+                    <p>{formatDate(card.date)}</p>
+                  </div>
+                  <span className="status-flag">{card.status.text}</span>
                 </div>
                 <div className="attendance-times">
                   <div>
