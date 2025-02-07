@@ -1,24 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 import { theme } from "../../styles/theme";
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
 
 export const Container = styled.div`
   display: flex;
@@ -108,10 +90,11 @@ export const Header = styled.header`
       padding: 5px 10px;
       border-radius: ${theme.borderRadius};
       border: 1px solid ${theme.colors.inputBorder};
-      background-color: ${theme.colors.inputBackground};
+      background-color: ${theme.colors.attendanceBackground};
       color: ${theme.colors.text};
       font-size: ${theme.fontSizes.text};
       height: 38px;
+      cursor: pointer;
 
       &:focus {
         border-color: ${theme.colors.primary};
@@ -140,6 +123,12 @@ export const Header = styled.header`
       .MuiSvgIcon-root {
         font-size: 1.2rem;
       }
+
+      @media (max-width: 480px) {
+        .MuiButton-label > span:not(.MuiButton-startIcon) {
+          display: none;
+        }
+      }
     }
   }
 
@@ -152,6 +141,45 @@ export const Header = styled.header`
       margin-top: 10px;
       width: 100%;
       justify-content: space-between;
+
+      select {
+        font-size: 14px;
+        height: 30px;
+      }
+
+      .download-button {
+        font-size: 14px;
+        height: 30px;
+        padding: 4px 8px;
+      }
+    }
+  }
+
+  @media (max-width: 481px) {
+    .header-right {
+      .download-button {
+        font-size: 12px;
+        height: 28px;
+        padding: 3px 6px;
+      }
+    }
+  }
+
+  @media (max-width: 320px) {
+    .header-right {
+      .download-button {
+        font-size: 10px;
+        height: 26px;
+        padding: 2px 5px;
+      }
+    }
+  }
+
+  @media (max-width: 681px) {
+    .header-right {
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 10px;
     }
   }
 `;
@@ -188,17 +216,34 @@ export const Card = styled.div`
 export const AttendanceGrid = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
   background-color: ${theme.colors.attendanceBackground};
   color: ${theme.colors.text};
   padding: 40px;
   border-radius: 30px;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-top: 20px;
 
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${theme.colors.inputBackground};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${theme.colors.iconColor};
+    border-radius: 10px;
+    border: 2px solid ${theme.colors.inputBackground};
+  }
+
   @media (max-width: 768px) {
-    padding: 15px;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 20px;
+  }
+
+  &:nth-of-type(3) {
+    height: 100%;
   }
 `;
 
@@ -234,19 +279,14 @@ export const AttendanceCard = styled.div`
   background: ${theme.colors.attendanceCardBackground};
   border-radius: 25px;
   box-shadow: ${theme.boxShadow};
-  padding: 30px;
+  padding: 20px;
   width: 100%;
-  animation: ${fadeIn} 0.5s ease-in-out;
-
-  &.fade-out {
-    animation: ${fadeOut} 0.5s ease-in-out;
-  }
 
   .attendance-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     .header-left {
       display: flex;
@@ -256,7 +296,7 @@ export const AttendanceCard = styled.div`
       p {
         margin-left: 5px;
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
     }
 
@@ -265,7 +305,7 @@ export const AttendanceCard = styled.div`
       background-color: ${(props) => props.backgroundColor};
       padding: 5px 10px;
       border-radius: 20px;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 500;
     }
 
@@ -276,7 +316,7 @@ export const AttendanceCard = styled.div`
       .status-flag {
         margin-top: 10px;
         padding: 4px 8px;
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
     }
   }
@@ -291,13 +331,13 @@ export const AttendanceCard = styled.div`
       align-items: left;
 
       p:first-child {
-        font-size: 15px;
+        font-size: 14px;
         color: ${theme.colors.textSecondary};
         font-weight: regular;
       }
 
       p:last-child {
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-top: 5px;
         font-weight: 500;
       }
@@ -453,18 +493,26 @@ export const SearchContainer = styled.div`
       border-color: ${theme.colors.primary};
       outline: none;
     }
+
+    @media (max-width: 769px) {
+      margin-left: 20px;
+      font-size: 14px;
+    }
   }
 
   .search-icon {
     position: absolute;
     margin-left: 10px;
     color: ${theme.colors.iconColor};
+
+    @media (max-width: 769px) {
+      margin-left: 30px;
+    }
   }
 `;
 
 export const EmployeeCardContainer = styled.div`
   border-radius: 8px;
-  padding: 20px;
   display: flex;
   align-items: center;
 
@@ -493,6 +541,10 @@ export const EmployeeCardContainer = styled.div`
       @media (max-width: 768px) {
         font-size: 22px;
       }
+
+      @media (max-width: 480px) {
+        font-size: 18px;
+      }
     }
 
     .employee-info {
@@ -508,12 +560,29 @@ export const EmployeeCardContainer = styled.div`
           font-size: ${theme.fontSizes.text};
           color: ${theme.colors.text};
           font-weight: normal;
+
+          @media (max-width: 480px) {
+            font-size: 14px;
+          }
         }
 
         .info-label {
           font-size: ${theme.fontSizes.text};
           color: ${theme.colors.textSecondary};
+
+          @media (max-width: 480px) {
+            font-size: 12px;
+          }
         }
+      }
+    }
+  }
+
+  @media (max-width: 1250px) {
+    .employee-details {
+      .employee-info {
+        flex-direction: column;
+        gap: 1rem;
       }
     }
   }
@@ -532,6 +601,19 @@ export const EmployeeCardContainer = styled.div`
       .employee-info {
         flex-direction: column;
         gap: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 681px) {
+    align-items: center;
+    text-align: center;
+
+    .employee-details {
+      align-items: center;
+
+      .employee-info {
+        align-items: center;
       }
     }
   }

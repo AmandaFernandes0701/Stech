@@ -97,8 +97,6 @@ EmployeeCard.propTypes = {
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
-  const [fadeIn, setFadeIn] = useState(true);
   const [activeButtons, setActiveButtons] = useState([]);
   const cardsPerPage = 6;
 
@@ -172,37 +170,19 @@ const Dashboard = () => {
 
   const handleNextPage = () => {
     if (currentPage * cardsPerPage < sortedAttendanceData.length) {
-      setFadeOut(true);
-      setTimeout(() => {
-        setCurrentPage(currentPage + 1);
-        setFadeOut(false);
-        setFadeIn(true);
-        setTimeout(() => setFadeIn(false), 500);
-      }, 500);
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setFadeOut(true);
-      setTimeout(() => {
-        setCurrentPage(currentPage - 1);
-        setFadeOut(false);
-        setFadeIn(true);
-        setTimeout(() => setFadeIn(false), 500);
-      }, 500);
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handlePageClick = (pageNumber) => {
     if (currentPage !== pageNumber) {
-      setFadeOut(true);
-      setTimeout(() => {
-        setCurrentPage(pageNumber);
-        setFadeOut(false);
-        setFadeIn(true);
-        setTimeout(() => setFadeIn(false), 500);
-      }, 500);
+      setCurrentPage(pageNumber);
     }
   };
 
@@ -253,7 +233,7 @@ const Dashboard = () => {
                 <option value="2018">2018</option>
               </select>
               <Button className="download-button" startIcon={<GetApp />}>
-                Download Info
+                {isSmallScreen ? "Download" : "Download Info"}
               </Button>
             </div>
           </Header>
@@ -311,9 +291,6 @@ const Dashboard = () => {
             {currentCards.map((card, index) => (
               <AttendanceCard
                 key={index}
-                className={`${fadeOut ? "fade-out" : ""} ${
-                  fadeIn ? "fade-in" : ""
-                }`}
                 color={card.status.color}
                 backgroundColor={card.status.backgroundColor}
               >
