@@ -1,11 +1,19 @@
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Text, TextBold, MotionDiv } from "../../pages/login/styles";
+import { theme } from "../../styles/theme";
 
 import { useCarouselContent } from "./content";
-import { ArrowsContainer, ArrowButton, WhiteCard, InnerCard } from "./styles";
+import {
+  ArrowsContainer,
+  ArrowButton,
+  WhiteCard,
+  InnerCard,
+  LoadingContainer,
+} from "./styles";
 
 const Carousel = () => {
   const slides = useCarouselContent();
@@ -19,8 +27,30 @@ const Carousel = () => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
+  const [loadingDots, setLoadingDots] = useState(".");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoadingDots((prev) => (prev.length === 3 ? "." : prev + "."));
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
   if (slides.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <LoadingContainer>
+        <CircularProgress style={{ color: theme.colors.primary }} />
+        <TextBold
+          style={{
+            color: theme.colors.primary,
+            fontSize: "25px",
+            marginLeft: "20px",
+          }}
+        >
+          Carregando{loadingDots}
+        </TextBold>
+      </LoadingContainer>
+    );
   }
 
   return (

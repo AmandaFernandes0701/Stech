@@ -218,25 +218,6 @@ export const TestimonialCard = styled.div`
     }
   }
 `;
-//   background: white;
-//   color: black;
-//   padding: 30px;
-//   border-radius: 15px;
-//   font-size: 14px;
-//   font-weight: bold;
-//   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-//   height: auto;
-
-//   @media (max-width: 768px) {
-//     padding: 20px;
-//     font-size: 12px;
-//   }
-
-//   @media (max-width: 480px) {
-//     padding: 15px;
-//     font-size: 10px;
-//   }
-// `;
 
 export const HeadingWrapper = styled.div`
   margin-bottom: 50px;

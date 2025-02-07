@@ -124,7 +124,6 @@ EmployeeCard.propTypes = {
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [open, setOpen] = useState({});
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [activeButtons, setActiveButtons] = useState([]);
   const [employee, setEmployee] = useState(null);
@@ -170,10 +169,6 @@ const Dashboard = () => {
 
     fetchEmployeeData();
   }, []);
-
-  const handleToggle = (menu) => {
-    setOpen((prev) => ({ ...prev, [menu]: !prev[menu] }));
-  };
 
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
@@ -265,7 +260,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <LoadingContainer>
-        <CircularProgress />
+        <CircularProgress style={{ color: theme.colors.primary }} />
       </LoadingContainer>
     );
   }

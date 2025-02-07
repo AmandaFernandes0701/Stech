@@ -107,3 +107,18 @@ export const InnerCard = styled.div`
     flex: 1;
   }
 `;
+
+export const LoadingContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${theme.colors.formBackground};
+  color: ${theme.colors.text};
+  font-size: ${theme.fontSizes.title};
+  z-index: 9999;
+`;
