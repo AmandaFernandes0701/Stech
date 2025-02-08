@@ -22,6 +22,7 @@ import {
   Text,
   Subtitle,
   ForgotPassword,
+  ForgotPasswordLink,
   SocialLogin,
   TestimonialSection,
   TestimonialCard,
@@ -79,7 +80,7 @@ const Login = () => {
           <InputField
             type="password"
             label={
-              <div style={{ display: "flex", alignItems: "end" }}>
+              <div style={{ display: "flex", alignItems: "flex-end" }}>
                 Password
                 <ForgotPassword>
                   <InfoIcon
@@ -113,7 +114,11 @@ const Login = () => {
             setShowPassword={setShowPassword}
           />
         </ValidPasswordDiv>
-
+        <div
+          style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
+        >
+          <ForgotPasswordLink>Forgot Password?</ForgotPasswordLink>
+        </div>
         <Button onClick={handleLogin} loading={loading}>
           Sign in
         </Button>

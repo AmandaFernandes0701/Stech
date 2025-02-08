@@ -111,6 +111,28 @@ export const ForgotPassword = styled.div`
       opacity: 1;
     }
   }
+
+  a {
+    color: ${theme.colors.primary};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export const ForgotPasswordLink = styled.p`
+  align-self: flex-end;
+  font-size: 14px;
+  padding-right: 8px;
+  color: ${theme.colors.primary};
+  float: right;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 export const ValidPasswordDiv = styled.div`
