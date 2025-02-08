@@ -13,10 +13,10 @@ import {
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
 import Draggable from "react-draggable";
 
+import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 import Loading from "../../components/loading/Loading";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import theme from "../../styles/theme";
@@ -32,7 +32,6 @@ import {
   Controls,
   PaginationControls,
   SearchContainer,
-  EmployeeCardContainer,
   HamburgerMenu,
   Overlay,
 } from "./styles";
@@ -66,39 +65,6 @@ const generatePaginationNumbers = (currentPage, totalPages) => {
 const formatDate = (date) => {
   const options = { year: "numeric", month: "long", day: "2-digit" };
   return date.toLocaleDateString("en-US", options).replace(",", ",");
-};
-
-const EmployeeCard = ({ employee }) => (
-  <EmployeeCardContainer>
-    <img src={employee.photo} alt="Profile" className="employee-photo" />
-    <div className="employee-details">
-      <div className="employee-name">{employee.name}</div>
-      <div className="employee-info">
-        <div className="info-column">
-          <div className="info-label">Role:</div>
-          <div className="info-item">{employee.position}</div>
-        </div>
-        <div className="info-column">
-          <div className="info-label">Phone:</div>
-          <div className="info-item">{employee.phone}</div>
-        </div>
-        <div className="info-column">
-          <div className="info-label">Email Address:</div>
-          <div className="info-item">{employee.email}</div>
-        </div>
-      </div>
-    </div>
-  </EmployeeCardContainer>
-);
-
-EmployeeCard.propTypes = {
-  employee: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 const Dashboard = () => {
