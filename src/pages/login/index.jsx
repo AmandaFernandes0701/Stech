@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../../components/button/Button";
 import Carousel from "../../components/carousel/Carousel";
-import { useCarouselContent } from "../../components/carousel/content";
 import InputField from "../../components/input-field/InputField";
+import { useCarouselContent } from "../../utils/carouselContent";
 import { validateEmail, validatePassword } from "../../utils/validation";
 
 import {

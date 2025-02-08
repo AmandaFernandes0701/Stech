@@ -12,7 +12,6 @@ import {
   Close as CloseIcon,
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
-import axios from "axios";
 import { useState, useMemo, useEffect } from "react";
 import Draggable from "react-draggable";
 
@@ -20,6 +19,7 @@ import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 import Loading from "../../components/loading/Loading";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import theme from "../../styles/theme";
+import { fetchEmployeeData } from "../../utils/fetchEmployeeData";
 
 import {
   Container,
@@ -92,19 +92,10 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const fetchEmployeeData = async () => {
+    const getEmployeeData = async () => {
       try {
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/users/1"
-        );
-        const userData = response.data;
-        setEmployee({
-          name: userData.name,
-          position: userData.company.bs,
-          phone: userData.phone,
-          email: userData.email,
-          photo: `https://i.pravatar.cc/150?img=${userData.id}`,
-        });
+        const employeeData = await fetchEmployeeData();
+        setEmployee(employeeData);
       } catch (error) {
         console.error("Error fetching employee data:", error);
       } finally {
@@ -112,7 +103,7 @@ const Dashboard = () => {
       }
     };
 
-    fetchEmployeeData();
+    getEmployeeData();
   }, []);
 
   const handleMenuItemClick = (menuItem) => {

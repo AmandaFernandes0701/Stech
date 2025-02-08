@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { Text, TextBold, MotionDiv } from "../../pages/login/styles";
+import { useCarouselContent } from "../../utils/carouselContent";
 import Loading from "../loading/Loading";
 
-import { useCarouselContent } from "./content";
 import { ArrowsContainer, ArrowButton, WhiteCard, InnerCard } from "./styles";
 
 const Carousel = () => {
