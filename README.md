@@ -93,7 +93,6 @@ These **architectural decisions enhance maintainability, scalability, and long-t
 
 ## Project Structure  
 
-```
 📦 stech  
  ┣ 📂 src                         # Main source code directory  
  ┃ ┣ 📂 assets                    # Folder for static assets like images and icons  
@@ -109,36 +108,81 @@ These **architectural decisions enhance maintainability, scalability, and long-t
  ┣ 📜 package-lock.json           # Automatically generated file by npm to ensure consistent versions  
  ┣ 📜 package.json                # npm configuration file with dependencies and scripts for the project  
  ┣ 📜 README.md                   # Project documentation file, containing development information  
- ┣ 📜 vite.config.js              # Configuration file for Vite, the module bundler used in the project  
-```
+ ┣ 📜 vite.config.js              # Configuration file for Vite, the module bundler used in the project
+  
 
 ---  
 
-## Installation and Setup  
+## Project Conventions and Naming Standards  
 
-To run the project locally, follow these steps:  
+To ensure **consistency, readability, and maintainability**, I followed strict **naming conventions** and commit standards throughout the project:  
 
-1. Clone the repository:
-   ```sh
-   git clone <repository-url>
-   ```
+### Naming Conventions  
+- **Folders**: Named using **kebab-case** (e.g., pages, components/input-field).  
+- **JavaScript Files**: Named using **camelCase** (e.g., validation.js).  
+- **React Components**: Named using **PascalCase** (e.g., InputField.jsx).  
+- **Styled Components**: Follow the **same name as the component file**, keeping a **1:1 mapping** between style and component (e.g., InputField.jsx and styles.js).  
+- **Theme Variables**: Defined in theme.js, ensuring **consistent design system usage** across all components.  
+- **Global Styles**: Managed in GlobalStyles.js using **Styled Components**, enforcing uniform styling.  
 
-2. Navigate to the project directory:
-   ```sh
-   cd stech
-   ```
+### Commit Message Standardization  
+To maintain a **clear and structured commit history**, I integrated **Git Commitizen** to enforce **Conventional Commits**.  
 
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
+#### Commit Format  
+<type>(<scope>): <short description>
+[optional blank line]
+<long description (if necessary)>
 
-4. Start the development server:
-   ```sh
-   npm run dev
-   ```
 
-The application will now be running locally. Open **http://localhost:5173/** (or the port shown in your terminal) to access it.  
+#### Explanation of Elements:
+
+1. **Commit Types**:  
+   <details> <summary>The standardized commit types are (click here to expand):</summary>
+    
+     - **refactor**: Refactoring code without changing functionality.  
+     - **feat**: Adding a new feature.
+     - **fix**: Fixing a bug.  
+     - **chore**: Maintenance tasks or tasks that don't affect the functionality (e.g., updating dependencies).  
+     - **docs**: Documentation updates.  
+     - **style**: Code style changes that do not affect functionality (e.g., formatting, semicolons).  
+     - **test**: Adding or modifying tests.  
+     - **perf**: Performance improvements.  
+     - **ci**: Continuous integration changes (e.g., CI configuration updates).  
+     - **build**: Changes related to the build system or external dependencies.  
+     - **wip**: Work in progress.
+       
+  </details>
+
+2. **Scope** (optional but recommended):
+   - Specifies the area of code changed (e.g., (login), (input-component), (styles)).
+
+3. **Short Description**: 
+   - A concise and objective phrase explaining the change.  
+
+4. **Long Description** (optional):
+   - Additional details about the change, including why and how it was implemented.
+
+#### Example Commit Messages:
+sh
+git commit -m "feat(validation): add email validation to login form"
+git commit -m "fix(button): correct padding issue on submit button"
+git commit -m "refactor(inputComponent): modularize input component code"
+
+
+This ensures **readability, better tracking of changes, and a standardized workflow**.  
+
+---  
+
+## Deployment Process  
+
+This project is deployed on **Vercel** for **fast and efficient hosting**.  
+
+### Deployment Steps  
+sh  
+npm install -g vercel  
+vercel --prod
+  
+This enables **continuous deployment** by integrating with GitHub.  
 
 ---  
 
@@ -151,4 +195,3 @@ This project demonstrates my ability to:
 - **Deploy and manage a React application effectively using Vercel**.  
 
 By prioritizing **code quality, maintainability, and user experience**, I ensured this project aligns with **industry standards** for frontend development.
-
