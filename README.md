@@ -35,7 +35,9 @@ To ensure **high performance, maintainability, and scalability**, I selected the
 - **React Router DOM** – Manages client-side navigation seamlessly.  
 - **React Toastify** – Provides user-friendly notification feedback.  
 - **Styled Components** – CSS-in-JS for dynamic and modular styling.  
-- **Framer Motion** – Enables smooth animations for an enhanced UX.  
+- **Framer Motion** – Enables smooth animations for an enhanced UX.
+- **Zod** – For schema validation, ensuring strict input validation throughout the application.
+- **React-Draggable** – Used for draggable elements to enhance the user experience with flexible UI components.
 - **Vercel** – A cloud platform for quick and efficient deployment.  
 - **Git Commitizen** – Enforces a **conventional commit format**, improving version control and documentation.  
 
@@ -48,15 +50,19 @@ Each technology was carefully selected to **maximize maintainability, performanc
 This project incorporates **key features** to enhance usability and maintainability:  
 
 ### Authentication System  
-- **Login form with real-time validation** for email and password fields.  
+- **Login form with real-time validation** for email and password fields using Zod to validate the input formats strictly.
 - **Error messages for invalid inputs**, empty fields, and incorrect formats.  
-- **Toggle password visibility** for improved user experience.  
+- **Toggle password visibility** for improved user experience.
+- **Password requirements guidance** through **Tooltips**, which guide users on valid password format and criteria.
 - **Toast notifications** providing immediate login feedback.  
 
 ### Dashboard  
 - **Displays mock user data** fetched from JSONPlaceholder.  
-- **Material UI cards** to present structured information clearly.  
-- **Responsive design**, ensuring usability across all devices.  
+- **Material UI cards** to present structured information clearly.
+- **Collapsible sections** to display data in a clean and organized manner.
+- **Pagination** added to the cards to limit the data displayed at once, improving readability and performance.
+- **Responsive design**, ensuring usability across all devices.
+- **Loading state handling**: To avoid showing an empty screen, loading states are displayed until images and data from the API are fully loaded.
 
 ### UI/UX Enhancements  
 - **Keyboard accessibility improvements** for better usability.  
