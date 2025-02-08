@@ -26,12 +26,13 @@ import {
   Menu as MenuIcon,
   Close as CloseIcon,
 } from "@mui/icons-material";
-import { IconButton, Button, CircularProgress } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
 import Draggable from "react-draggable";
 
+import Loading from "../../components/loading/Loading";
 import theme from "../../styles/theme";
 
 import {
@@ -258,11 +259,7 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return (
-      <LoadingContainer>
-        <CircularProgress style={{ color: theme.colors.primary }} />
-      </LoadingContainer>
-    );
+    return <Loading />;
   }
 
   return (

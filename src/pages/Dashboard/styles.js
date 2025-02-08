@@ -610,16 +610,6 @@ export const EmployeeCardContainer = styled.div`
   }
 `;
 
-export const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: ${theme.colors.formBackground};
-  color: ${theme.colors.text};
-  font-size: ${theme.fontSizes.title};
-`;
-
 export const SidebarContainer = styled.div`
   width: 250px;
   background: #181818;

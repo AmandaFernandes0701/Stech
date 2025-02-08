@@ -117,7 +117,7 @@ const Login = () => {
         <div
           style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
         >
-          <ForgotPasswordLink>Forgot Password?</ForgotPasswordLink>
+          <ForgotPasswordLink>Forgot your Password?</ForgotPasswordLink>
         </div>
         <Button onClick={handleLogin} loading={loading}>
           Sign in
