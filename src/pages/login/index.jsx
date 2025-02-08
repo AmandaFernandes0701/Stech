@@ -97,11 +97,11 @@ const Login = () => {
                       <p>
                         <strong>Must contain at least:</strong>
                       </p>
-                      <p className="indent"> - 6 characters long.</p>
-                      <p className="indent"> - 1 uppercase letter.</p>
-                      <p className="indent"> - 1 lowercase letter.</p>
-                      <p className="indent"> - 1 number.</p>
-                      <p className="indent"> - 1 special character.</p>
+                      <p className="indent"> - 6 characters long</p>
+                      <p className="indent"> - 1 uppercase letter</p>
+                      <p className="indent"> - 1 lowercase letter</p>
+                      <p className="indent"> - 1 number</p>
+                      <p className="indent"> - 1 special character</p>
                     </ul>
                   </Tooltip>
                 </ForgotPassword>
