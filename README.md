@@ -1,98 +1,82 @@
-# STech – Authentication and Dashboard System  
+# STech – Authentication and Dashboard System
 
-## Table of Contents  
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Features and Functionalities](#features-and-functionalities)
+- [Architectural Decisions](#architectural-decisions)
+- [Project Structure](#project-structure)
+- [Project Conventions and Naming Standards](#project-conventions-and-naming-standards)
+- [Error Handling and Validation](#error-handling-and-validation)
+- [Deployment Process](#deployment-process)
+- [Installation and Setup](#installation-and-setup)
+- [Final Considerations](#final-considerations)
 
-1. [Project Overview](#project-overview)  
-2. [Technologies Used](#technologies-used)  
-3. [Features and Functionalities](#features-and-functionalities)  
-4. [Architectural Decisions](#architectural-decisions)  
-5. [Project Structure](#project-structure)  
-6. [Project Conventions and Naming Standards](#project-conventions-and-naming-standards)  
-7. [Error Handling and Validation](#error-handling-and-validation)  
-8. [Deployment Process](#deployment-process)  
-9. [Installation and Setup](#installation-and-setup)  
-10. [Final Considerations](#final-considerations)  
+## Project Overview
+This project was developed as part of a Software Development Internship Test, requiring the implementation of a Login System and a Dashboard. My goal was to build a scalable, well-structured, and maintainable application following modern frontend development best practices.
 
----  
+The solution was designed with clean architecture principles, ensuring code reusability, separation of concerns, and an intuitive user experience.
 
-## Project Overview  
+The live version is available at: **STech - Amanda**
 
-This project was developed as part of a **Software Development Internship Test**, requiring the implementation of a **Login System** and a **Dashboard**. My goal was to build a **scalable, well-structured, and maintainable** application following **modern frontend development best practices**.  
+## Technologies Used
+To ensure high performance, maintainability, and scalability, I selected the following technologies:
 
-The solution was designed with **clean architecture principles**, ensuring **code reusability, separation of concerns, and an intuitive user experience**.  
-
-The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)  
-
----  
-
-## Technologies Used  
-
-To ensure **high performance, maintainability, and scalability**, I selected the following technologies:  
-
-- **React.js** – A component-based library for building UIs efficiently.  
-- **Vite** – A fast development and build tool optimized for performance.  
-- **Material UI** – A modern UI component library ensuring accessibility and design consistency.  
-- **React Router DOM** – Manages client-side navigation seamlessly.  
-- **React Toastify** – Provides user-friendly notification feedback.  
-- **Styled Components** – CSS-in-JS for dynamic and modular styling.  
+- **React.js** – A component-based library for building UIs efficiently.
+- **Vite** – A fast development and build tool optimized for performance.
+- **Material UI** – A modern UI component library ensuring accessibility and design consistency.
+- **React Router DOM** – Manages client-side navigation seamlessly.
+- **React Toastify** – Provides user-friendly notification feedback.
+- **Styled Components** – CSS-in-JS for dynamic and modular styling.
 - **Framer Motion** – Enables smooth animations for an enhanced UX.
-- **Zod** – For schema validation, ensuring strict input validation throughout the application.
-- **React-Draggable** – Used for draggable elements to enhance the user experience with flexible UI components.
-- **Vercel** – A cloud platform for quick and efficient deployment.  
-- **Git Commitizen** – Enforces a **conventional commit format**, improving version control and documentation.  
+- **Zod** – Schema-based validation for form inputs.
+- **React Draggable** – Allows drag-and-drop functionality for UI elements.
+- **Tooltip** – Displays password validation rules in a user-friendly way.
+- **Vercel** – A cloud platform for quick and efficient deployment.
+- **Git Commitizen** – Enforces a conventional commit format, improving version control and documentation.
 
-Each technology was carefully selected to **maximize maintainability, performance, and user experience**.  
+Each technology was carefully selected to maximize maintainability, performance, and user experience.
 
----  
+## Features and Functionalities
+This project incorporates key features to enhance usability and maintainability:
 
-## Features and Functionalities  
+### Authentication System
+- Login form with real-time validation for email and password fields.
+- Error messages for invalid inputs, empty fields, and incorrect formats.
+- Toggle password visibility for improved user experience.
+- Tooltip with password validation criteria.
+- Toast notifications providing immediate login feedback.
 
-This project incorporates **key features** to enhance usability and maintainability:  
+### Dashboard
+- Displays mock user data fetched from JSONPlaceholder.
+- Material UI cards to present structured information clearly.
+- Responsive design, ensuring usability across all devices.
+- Drag-and-drop functionality using React Draggable.
 
-### Authentication System  
-- **Login form with real-time validation** for email and password fields using Zod to validate the input formats strictly.
-- **Error messages for invalid inputs**, empty fields, and incorrect formats.  
-- **Toggle password visibility** for improved user experience.
-- **Password requirements guidance** through **Tooltips**, which guide users on valid password format and criteria.
-- **Toast notifications** providing immediate login feedback.  
+### UI/UX Enhancements
+- Keyboard accessibility improvements for better usability.
+- Smooth transitions using Framer Motion for a polished experience.
+- Consistent design system using a global theme for styling.
 
-### Dashboard  
-- **Displays mock user data** fetched from JSONPlaceholder.  
-- **Material UI cards** to present structured information clearly.
-- **Collapsible sections** to display data in a clean and organized manner.
-- **Pagination** added to the cards to limit the data displayed at once, improving readability and performance.
-- **Responsive design**, ensuring usability across all devices.
-- **Loading state handling**: To avoid showing an empty screen, loading states are displayed until images and data from the API are fully loaded.
+## Architectural Decisions
+I designed this project with a modular, scalable, and maintainable architecture. The key principles followed include:
 
-### UI/UX Enhancements  
-- **Keyboard accessibility improvements** for better usability.  
-- **Smooth transitions** using Framer Motion for a polished experience.  
-- **Consistent design system** using a global theme for styling.  
+### Componentization and Reusability
+- UI components (buttons, inputs) are reusable and isolated to prevent redundancy.
+- Each page has its own structure, ensuring clear separation of concerns.
 
----  
+### Modularization
+- Business logic is separate from UI logic, improving maintainability.
+- Validation logic is centralized, making it easy to modify or expand.
 
-## Architectural Decisions  
+### State Management
+- `useState` is used for local state management, keeping the project lightweight.
+- State lifting is applied where necessary, ensuring a clear data flow.
 
-I designed this project with a **modular, scalable, and maintainable architecture**. The key principles followed include:  
+These architectural decisions enhance maintainability, scalability, and long-term project sustainability.
 
-### Componentization and Reusability  
-- **UI components (buttons, inputs) are reusable and isolated** to prevent redundancy.  
-- **Each page has its own structure**, ensuring clear separation of concerns.  
-
-### Modularization  
-- **Business logic is separate from UI logic**, improving maintainability.  
-- **Validation logic is centralized**, making it easy to modify or expand.  
-
-### State Management  
-- **useState is used for local state management**, keeping the project lightweight.  
-- **State lifting is applied where necessary**, ensuring a clear data flow.  
-
-These **architectural decisions enhance maintainability, scalability, and long-term project sustainability**.  
-
----  
-
-## Project Structure  
-
+## Project Structure
+```
 📦 stech  
  ┣ 📂 src                         # Main source code directory  
  ┃ ┣ 📂 assets                    # Folder for static assets like images and icons  
@@ -108,90 +92,69 @@ These **architectural decisions enhance maintainability, scalability, and long-t
  ┣ 📜 package-lock.json           # Automatically generated file by npm to ensure consistent versions  
  ┣ 📜 package.json                # npm configuration file with dependencies and scripts for the project  
  ┣ 📜 README.md                   # Project documentation file, containing development information  
- ┣ 📜 vite.config.js              # Configuration file for Vite, the module bundler used in the project
-  
+ ┣ 📜 vite.config.js              # Configuration file for Vite, the module bundler used in the project  
+```
 
----  
+## Project Conventions and Naming Standards
+To ensure consistency, readability, and maintainability, I followed strict naming conventions and commit standards throughout the project:
 
-## Project Conventions and Naming Standards  
+### Naming Conventions
+- **Folders**: Named using kebab-case (e.g., `pages`, `components/input-field`).
+- **JavaScript Files**: Named using camelCase (e.g., `validation.js`).
+- **React Components**: Named using PascalCase (e.g., `InputField.jsx`).
+- **Styled Components**: Follow the same name as the component file, keeping a 1:1 mapping between style and component (e.g., `InputField.jsx` and `styles.js`).
+- **Theme Variables**: Defined in `theme.js`, ensuring consistent design system usage across all components.
+- **Global Styles**: Managed in `GlobalStyles.js` using Styled Components, enforcing uniform styling.
 
-To ensure **consistency, readability, and maintainability**, I followed strict **naming conventions** and commit standards throughout the project:  
+### Commit Message Standardization
+To maintain a clear and structured commit history, I integrated Git Commitizen to enforce Conventional Commits.
 
-### Naming Conventions  
-- **Folders**: Named using **kebab-case** (e.g., pages, components/input-field).  
-- **JavaScript Files**: Named using **camelCase** (e.g., validation.js).  
-- **React Components**: Named using **PascalCase** (e.g., InputField.jsx).  
-- **Styled Components**: Follow the **same name as the component file**, keeping a **1:1 mapping** between style and component (e.g., InputField.jsx and styles.js).  
-- **Theme Variables**: Defined in theme.js, ensuring **consistent design system usage** across all components.  
-- **Global Styles**: Managed in GlobalStyles.js using **Styled Components**, enforcing uniform styling.  
-
-### Commit Message Standardization  
-To maintain a **clear and structured commit history**, I integrated **Git Commitizen** to enforce **Conventional Commits**.  
-
-#### Commit Format  
+#### Commit Format
+```
 <type>(<scope>): <short description>
 [optional blank line]
 <long description (if necessary)>
-
-
-#### Explanation of Elements:
-
-1. **Commit Types**:  
-   <details> <summary>The standardized commit types are (click here to expand):</summary>
-    
-     - **refactor**: Refactoring code without changing functionality.  
-     - **feat**: Adding a new feature.
-     - **fix**: Fixing a bug.  
-     - **chore**: Maintenance tasks or tasks that don't affect the functionality (e.g., updating dependencies).  
-     - **docs**: Documentation updates.  
-     - **style**: Code style changes that do not affect functionality (e.g., formatting, semicolons).  
-     - **test**: Adding or modifying tests.  
-     - **perf**: Performance improvements.  
-     - **ci**: Continuous integration changes (e.g., CI configuration updates).  
-     - **build**: Changes related to the build system or external dependencies.  
-     - **wip**: Work in progress.
-       
-  </details>
-
-2. **Scope** (optional but recommended):
-   - Specifies the area of code changed (e.g., (login), (input-component), (styles)).
-
-3. **Short Description**: 
-   - A concise and objective phrase explaining the change.  
-
-4. **Long Description** (optional):
-   - Additional details about the change, including why and how it was implemented.
-
+```
 #### Example Commit Messages:
-sh
+```
 git commit -m "feat(validation): add email validation to login form"
 git commit -m "fix(button): correct padding issue on submit button"
 git commit -m "refactor(inputComponent): modularize input component code"
+```
 
+This ensures readability, better tracking of changes, and a standardized workflow.
 
-This ensures **readability, better tracking of changes, and a standardized workflow**.  
+## Error Handling and Validation
+- **Zod** is used to validate email and password inputs.
+- Errors are displayed in real time, guiding users towards valid inputs.
+- **React Toastify** provides immediate feedback on authentication success or failure.
+- **Tooltip** explains password strength requirements interactively.
 
----  
+## Deployment Process
+This project is deployed on Vercel for fast and efficient hosting.
 
-## Deployment Process  
-
-This project is deployed on **Vercel** for **fast and efficient hosting**.  
-
-### Deployment Steps  
-sh  
+### Deployment Steps
+```
 npm install -g vercel  
-vercel --prod
-  
-This enables **continuous deployment** by integrating with GitHub.  
+vercel --prod  
+```
+This enables continuous deployment by integrating with GitHub.
 
----  
+## Installation and Setup
+To set up and run the project locally:
+```
+git clone <repository-url>
+cd stech
+npm install
+npm run dev
+```
 
-## Final Considerations  
+## Final Considerations
+This project demonstrates my ability to:
 
-This project demonstrates my ability to:  
-- **Architect a scalable frontend system** using modern technologies.  
-- **Implement best practices in clean code, modularization, and componentization**.  
-- **Standardize naming conventions and commit messages** for better maintainability.  
-- **Deploy and manage a React application effectively using Vercel**.  
+- Architect a scalable frontend system using modern technologies.
+- Implement best practices in clean code, modularization, and componentization.
+- Standardize naming conventions and commit messages for better maintainability.
+- Deploy and manage a React application effectively using Vercel.
 
-By prioritizing **code quality, maintainability, and user experience**, I ensured this project aligns with **industry standards** for frontend development.
+By prioritizing code quality, maintainability, and user experience, I ensured this project aligns with industry standards for frontend development.
