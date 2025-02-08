@@ -109,6 +109,23 @@ To ensure consistency, readability, and maintainability, I followed strict namin
 ### Commit Message Standardization
 To maintain a clear and structured commit history, I integrated Git Commitizen to enforce Conventional Commits.
 
+### Commit Types
+<details>
+  <summary>Click here to expand the full list of commit types</summary>
+
+  - **feat:** A new feature
+  - **fix:** A bug fix
+  - **docs:** Documentation changes only
+  - **style:** Changes that do not affect code behavior (e.g., formatting, missing semicolons)
+  - **refactor:** Code refactoring that does not change functionality
+  - **perf:** Performance improvements
+  - **test:** Adding or modifying tests
+  - **chore:** Maintenance or build process changes (e.g., CI/CD, dependencies updates)
+  - **build:** Changes that affect the build system or external dependencies
+  - **ci:** Changes to the CI configuration files or scripts
+  - **revert:** Reverting a previous commit
+  - **hotfix:** Urgent bug fix deployed immediately
+
 #### Commit Format
 ```
 <type>(<scope>): <short description>
