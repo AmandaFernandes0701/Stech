@@ -4,20 +4,19 @@ import {
   FilterList,
   ViewModule,
   Menu,
-  ChevronLeft,
-  ChevronRight,
-  GetApp,
   Search,
   Menu as MenuIcon,
   Close as CloseIcon,
+  GetApp,
 } from "@mui/icons-material";
 import { IconButton, Button } from "@mui/material";
 import { useState, useMemo, useEffect } from "react";
 import Draggable from "react-draggable";
 
-import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
+import EmployeeCard from "../../components/employee-card/EmployeeCard";
 import Loading from "../../components/loading/Loading";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Pagination from "../../components/pagination/Pagination";
+import Sidebar from "../../components/sidebar/Sidebar";
 import theme from "../../styles/theme";
 import { fetchEmployeeData } from "../../utils/fetchEmployeeData";
 
@@ -30,37 +29,10 @@ import {
   AttendanceCard,
   AttendanceHeader,
   Controls,
-  PaginationControls,
   SearchContainer,
   HamburgerMenu,
   Overlay,
 } from "./styles";
-
-const generatePaginationNumbers = (currentPage, totalPages) => {
-  const paginationNumbers = [1];
-
-  if (currentPage > 3) {
-    paginationNumbers.push("...");
-  }
-
-  for (
-    let i = Math.max(2, currentPage - 1);
-    i <= Math.min(currentPage + 1, totalPages - 1);
-    i++
-  ) {
-    paginationNumbers.push(i);
-  }
-
-  if (currentPage < totalPages - 2) {
-    paginationNumbers.push("...");
-  }
-
-  if (totalPages > 1) {
-    paginationNumbers.push(totalPages);
-  }
-
-  return paginationNumbers;
-};
 
 const formatDate = (date) => {
   const options = { year: "numeric", month: "long", day: "2-digit" };
@@ -156,10 +128,6 @@ const Dashboard = () => {
     () => Math.ceil(sortedAttendanceData.length / cardsPerPage),
     [sortedAttendanceData.length, cardsPerPage]
   );
-  const paginationNumbers = useMemo(
-    () => generatePaginationNumbers(currentPage, totalPages),
-    [currentPage, totalPages]
-  );
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentCards = sortedAttendanceData.slice(
@@ -167,22 +135,8 @@ const Dashboard = () => {
     startIndex + cardsPerPage
   );
 
-  const handleNextPage = () => {
-    if (currentPage * cardsPerPage < sortedAttendanceData.length) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handlePageClick = (pageNumber) => {
-    if (currentPage !== pageNumber) {
-      setCurrentPage(pageNumber);
-    }
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   const handleFilterButtonClick = (buttonName) => {
@@ -332,40 +286,11 @@ const Dashboard = () => {
               </Draggable>
             ))}
           </AttendanceRow>
-          <PaginationControls>
-            <Button
-              className="pagination-button"
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-            >
-              <ChevronLeft fontSize="small" />
-            </Button>
-            {paginationNumbers.map((number, index) =>
-              number === "..." ? (
-                <span key={index} className="pagination-ellipsis">
-                  {number}
-                </span>
-              ) : (
-                <Button
-                  key={index}
-                  className={`pagination-button ${
-                    currentPage === number ? "active" : ""
-                  }`}
-                  onClick={() => handlePageClick(number)}
-                  disabled={currentPage === number}
-                >
-                  {number}
-                </Button>
-              )
-            )}
-            <Button
-              className="pagination-button"
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-            >
-              <ChevronRight fontSize="small" />
-            </Button>
-          </PaginationControls>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </AttendanceGrid>
       </MainContent>
     </Container>
