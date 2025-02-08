@@ -95,21 +95,47 @@ export const Subtitle = styled.p`
   }
 `;
 
-export const ForgotPassword = styled.a`
-  color: ${theme.colors.primary};
-  text-decoration: none;
-  padding-right: 10px;
-  font-size: ${theme.fontSizes.small};
+export const ForgotPassword = styled.div`
+  position: relative;
   cursor: pointer;
-  align-self: flex-end;
+  font-size: 14px;
+
+  &:hover .tooltip {
+    display: block;
+    opacity: 1;
+  }
 
   &:hover {
-    text-decoration: underline;
+    .tooltip {
+      display: block;
+      opacity: 1;
+    }
   }
+`;
 
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
+export const ValidPasswordDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+`;
+
+export const Tooltip = styled.div`
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+  background-color: black;
+  color: ${theme.colors.textLight};
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  z-index: 1;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 `;
 
 export const SocialLogin = styled.div`

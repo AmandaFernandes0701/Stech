@@ -20,10 +20,11 @@
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-draggable": "^4.4.3",
     "react-router-dom": "^7.1.5",
     "react-toastify": "^11.0.3",
     "styled-components": "^6.1.14",
-    "react-draggable": "^4.4.3"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

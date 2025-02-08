@@ -1,6 +1,7 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
+import InfoIcon from "@mui/icons-material/Info";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,8 @@ import {
   TestimonialSection,
   TestimonialCard,
   MotionDiv,
+  Tooltip,
+  ValidPasswordDiv,
 } from "./styles";
 
 const Login = () => {
@@ -72,19 +75,44 @@ const Login = () => {
           onEnterPress={handleLogin}
         />
 
-        <InputField
-          type="password"
-          label="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={passwordError}
-          onEnterPress={handleLogin}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-        />
-
-        <ForgotPassword>Forgot Password</ForgotPassword>
+        <ValidPasswordDiv>
+          <InputField
+            type="password"
+            label={
+              <div style={{ display: "flex", alignItems: "end" }}>
+                Password
+                <ForgotPassword>
+                  <InfoIcon
+                    fontSize="small"
+                    style={{
+                      fill: "none",
+                      stroke: "white",
+                      marginLeft: "5px",
+                      fontSize: "16px",
+                    }}
+                  />
+                  <Tooltip className="tooltip">
+                    <ul>
+                      <p>- Must be at least 6 characters long.</p>
+                      <p>- Must be less than 20 characters long.</p>
+                      <p>- Must contain at least one uppercase letter.</p>
+                      <p>- Must contain at least one lowercase letter.</p>
+                      <p>- Must contain at least one number.</p>
+                      <p>- Must contain at least one special character.</p>
+                    </ul>
+                  </Tooltip>
+                </ForgotPassword>
+              </div>
+            }
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={passwordError}
+            onEnterPress={handleLogin}
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+        </ValidPasswordDiv>
 
         <Button onClick={handleLogin} loading={loading}>
           Sign in
