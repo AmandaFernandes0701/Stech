@@ -126,6 +126,8 @@ To maintain a clear and structured commit history, I integrated Git Commitizen t
   - **revert:** Reverting a previous commit
   - **hotfix:** Urgent bug fix deployed immediately
 
+</details>
+
 #### Commit Format
 ```
 <type>(<scope>): <short description>
