@@ -20,7 +20,7 @@ This project was developed as part of a Software Development Internship Test, re
 
 The solution was designed with clean architecture principles, ensuring code reusability, separation of concerns, and an intuitive user experience.
 
-The live version is available at: **STech - Amanda**
+The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)  
 
 ---
 
