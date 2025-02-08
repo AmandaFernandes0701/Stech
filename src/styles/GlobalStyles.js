@@ -23,9 +23,17 @@ export const GlobalStyles = createGlobalStyle`
 
   .Toastify__toast--success {
     background-color: ${theme.colors.toastBackground};
-  }
-
-  .Toastify__toast--error {
-    background-color: ${theme.colors.error};
+    .Toastify__progress-bar {
+      background-color: ${theme.colors.primary};
+    }
+    .Toastify__toast-body {
+      color: ${theme.colors.primary};
+    }
+    .Toastify__close-button {
+      color: white;
+    }
+    svg {
+      fill:${theme.colors.primary};
+    }
   }
 `;

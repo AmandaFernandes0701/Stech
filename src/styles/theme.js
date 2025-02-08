@@ -24,6 +24,8 @@ export const theme = {
     attendanceCardBackground: "#37393d",
     inputTextColor: "#fff",
     iconButtonHover: "#2A2C30",
+    spinnerBorder: "rgb(201, 188, 188)",
+    spinnerBorderTop: "#2c6a53",
   },
   fontSizes: {
     title: "30px",

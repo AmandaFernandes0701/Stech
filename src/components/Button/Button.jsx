@@ -1,27 +1,9 @@
-import { useState, useEffect } from "react";
+import { useLoading } from "../../hooks/useLoading";
 
 import { ButtonContainer, SpinnerWrapper } from "./styles";
 
 const Button = ({ onClick, loading, children }) => {
-  const [dots, setDots] = useState(".");
-
-  useEffect(() => {
-    let dotInterval;
-    if (loading) {
-      dotInterval = setInterval(() => {
-        setDots((prev) => {
-          if (prev === "...") {
-            return ".";
-          }
-          return prev + ".";
-        });
-      }, 500);
-    } else {
-      setDots(".");
-    }
-
-    return () => clearInterval(dotInterval);
-  }, [loading]);
+  const dots = useLoading(loading);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
