@@ -8,21 +8,6 @@ import {
   ChevronRight,
   GetApp,
   Search,
-  ExpandLess,
-  ExpandMore,
-  HomeOutlined as HomeIcon,
-  BarChartOutlined as AnalyticsIcon,
-  EventOutlined as ScheduleIcon,
-  GroupOutlined as MembersIcon,
-  NotificationsOutlined as NotificationsIcon,
-  SettingsOutlined as SettingsIcon,
-  HelpOutline as HelpIcon,
-  AssessmentOutlined as ReportsIcon,
-  TrendingUpOutlined as TrendsIcon,
-  PieChartOutlined as OverviewIcon,
-  SecurityOutlined as SecurityIcon,
-  AccountCircleOutlined as AccountIcon,
-  BuildOutlined as ToolsIcon,
   Menu as MenuIcon,
   Close as CloseIcon,
 } from "@mui/icons-material";
@@ -33,6 +18,7 @@ import { useState, useMemo, useEffect } from "react";
 import Draggable from "react-draggable";
 
 import Loading from "../../components/loading/Loading";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import theme from "../../styles/theme";
 
 import {
@@ -47,14 +33,6 @@ import {
   PaginationControls,
   SearchContainer,
   EmployeeCardContainer,
-  LoadingContainer,
-  SidebarContainer,
-  MenuSection,
-  SectionTitle,
-  MenuItem,
-  ItemText,
-  SubMenu,
-  NotificationBadge,
   HamburgerMenu,
   Overlay,
 } from "./styles";
@@ -272,342 +250,26 @@ const Dashboard = () => {
           {sidebarOpen && (
             <>
               <Overlay onClick={() => setSidebarOpen(false)} />
-              <SidebarContainer>
-                <MenuSection>
-                  <SectionTitle>Main Menu</SectionTitle>
-                  <MenuItem
-                    onClick={() => handleMenuItemClick("dashboard")}
-                    className={activeMenuItem === "dashboard" ? "active" : ""}
-                    style={{
-                      backgroundColor:
-                        activeMenuItem === "dashboard"
-                          ? theme.colors.hover
-                          : "transparent",
-                    }}
-                  >
-                    <ItemText
-                      style={{
-                        color:
-                          activeMenuItem === "dashboard"
-                            ? theme.colors.primary
-                            : "inherit",
-                      }}
-                    >
-                      <HomeIcon /> Dashboard
-                    </ItemText>
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => setAnalyticsOpen(!analyticsOpen)}
-                    className={activeMenuItem === "analytics" ? "active" : ""}
-                    style={{
-                      backgroundColor:
-                        activeMenuItem === "analytics"
-                          ? theme.colors.hover
-                          : "transparent",
-                    }}
-                  >
-                    <ItemText
-                      style={{
-                        color:
-                          activeMenuItem === "analytics"
-                            ? theme.colors.primary
-                            : "inherit",
-                      }}
-                    >
-                      <AnalyticsIcon /> Analytics
-                    </ItemText>
-                    {analyticsOpen ? <ExpandLess /> : <ExpandMore />}
-                  </MenuItem>
-                  {analyticsOpen && (
-                    <SubMenu>
-                      <MenuItem>
-                        <ItemText>
-                          <ReportsIcon /> Reports
-                        </ItemText>
-                      </MenuItem>
-                      <MenuItem>
-                        <ItemText>
-                          <TrendsIcon /> Trends
-                        </ItemText>
-                      </MenuItem>
-                      <MenuItem>
-                        <ItemText>
-                          <OverviewIcon /> Overview
-                        </ItemText>
-                      </MenuItem>
-                      <MenuItem>
-                        <ItemText>
-                          <ScheduleIcon /> Schedules
-                        </ItemText>
-                      </MenuItem>
-                    </SubMenu>
-                  )}
-                  <MenuItem
-                    onClick={() => handleMenuItemClick("members")}
-                    className={activeMenuItem === "members" ? "active" : ""}
-                    style={{
-                      backgroundColor:
-                        activeMenuItem === "members"
-                          ? theme.colors.hover
-                          : "transparent",
-                    }}
-                  >
-                    <ItemText
-                      style={{
-                        color:
-                          activeMenuItem === "members"
-                            ? theme.colors.primary
-                            : "inherit",
-                      }}
-                    >
-                      <MembersIcon /> Members
-                    </ItemText>
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleMenuItemClick("notifications")}
-                    className={
-                      activeMenuItem === "notifications" ? "active" : ""
-                    }
-                    style={{
-                      backgroundColor:
-                        activeMenuItem === "notifications"
-                          ? theme.colors.hover
-                          : "transparent",
-                    }}
-                  >
-                    <ItemText
-                      style={{
-                        color:
-                          activeMenuItem === "notifications"
-                            ? theme.colors.primary
-                            : "inherit",
-                      }}
-                    >
-                      <NotificationsIcon /> Notifications
-                    </ItemText>
-                    <NotificationBadge>8</NotificationBadge>
-                  </MenuItem>
-                </MenuSection>
-
-                <MenuSection>
-                  <SectionTitle>Settings</SectionTitle>
-                  <MenuItem
-                    onClick={() => setSettingsOpen(!settingsOpen)}
-                    className={activeMenuItem === "settings" ? "active" : ""}
-                    style={{
-                      backgroundColor:
-                        activeMenuItem === "settings"
-                          ? theme.colors.hover
-                          : "transparent",
-                    }}
-                  >
-                    <ItemText
-                      style={{
-                        color:
-                          activeMenuItem === "settings"
-                            ? theme.colors.primary
-                            : "inherit",
-                      }}
-                    >
-                      <SettingsIcon /> Settings
-                    </ItemText>
-                    {settingsOpen ? <ExpandLess /> : <ExpandMore />}
-                  </MenuItem>
-                  {settingsOpen && (
-                    <SubMenu>
-                      <MenuItem>
-                        <ItemText>
-                          <SecurityIcon /> Security
-                        </ItemText>
-                      </MenuItem>
-                      <MenuItem>
-                        <ItemText>
-                          <AccountIcon /> Account
-                        </ItemText>
-                      </MenuItem>
-                      <MenuItem>
-                        <ItemText>
-                          <ToolsIcon /> Tools
-                        </ItemText>
-                      </MenuItem>
-                      <MenuItem>
-                        <ItemText>
-                          <HelpIcon /> Help Center
-                        </ItemText>
-                      </MenuItem>
-                    </SubMenu>
-                  )}
-                </MenuSection>
-              </SidebarContainer>
+              <Sidebar
+                activeMenuItem={activeMenuItem}
+                handleMenuItemClick={handleMenuItemClick}
+                analyticsOpen={analyticsOpen}
+                setAnalyticsOpen={setAnalyticsOpen}
+                settingsOpen={settingsOpen}
+                setSettingsOpen={setSettingsOpen}
+              />
             </>
           )}
         </>
       ) : (
-        <SidebarContainer>
-          <MenuSection>
-            <SectionTitle>Main Menu</SectionTitle>
-            <MenuItem
-              onClick={() => handleMenuItemClick("dashboard")}
-              className={activeMenuItem === "dashboard" ? "active" : ""}
-              style={{
-                backgroundColor:
-                  activeMenuItem === "dashboard"
-                    ? theme.colors.hover
-                    : "transparent",
-              }}
-            >
-              <ItemText
-                style={{
-                  color:
-                    activeMenuItem === "dashboard"
-                      ? theme.colors.primary
-                      : "inherit",
-                }}
-              >
-                <HomeIcon /> Dashboard
-              </ItemText>
-            </MenuItem>
-            <MenuItem
-              onClick={() => setAnalyticsOpen(!analyticsOpen)}
-              className={activeMenuItem === "analytics" ? "active" : ""}
-              style={{
-                backgroundColor:
-                  activeMenuItem === "analytics"
-                    ? theme.colors.hover
-                    : "transparent",
-              }}
-            >
-              <ItemText
-                style={{
-                  color:
-                    activeMenuItem === "analytics"
-                      ? theme.colors.primary
-                      : "inherit",
-                }}
-              >
-                <AnalyticsIcon /> Analytics
-              </ItemText>
-              {analyticsOpen ? <ExpandLess /> : <ExpandMore />}
-            </MenuItem>
-            {analyticsOpen && (
-              <SubMenu>
-                <MenuItem>
-                  <ItemText>
-                    <ReportsIcon /> Reports
-                  </ItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ItemText>
-                    <TrendsIcon /> Trends
-                  </ItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ItemText>
-                    <OverviewIcon /> Overview
-                  </ItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ItemText>
-                    <ScheduleIcon /> Schedules
-                  </ItemText>
-                </MenuItem>
-              </SubMenu>
-            )}
-            <MenuItem
-              onClick={() => handleMenuItemClick("members")}
-              className={activeMenuItem === "members" ? "active" : ""}
-              style={{
-                backgroundColor:
-                  activeMenuItem === "members"
-                    ? theme.colors.hover
-                    : "transparent",
-              }}
-            >
-              <ItemText
-                style={{
-                  color:
-                    activeMenuItem === "members"
-                      ? theme.colors.primary
-                      : "inherit",
-                }}
-              >
-                <MembersIcon /> Members
-              </ItemText>
-            </MenuItem>
-            <MenuItem
-              onClick={() => handleMenuItemClick("notifications")}
-              className={activeMenuItem === "notifications" ? "active" : ""}
-              style={{
-                backgroundColor:
-                  activeMenuItem === "notifications"
-                    ? theme.colors.hover
-                    : "transparent",
-              }}
-            >
-              <ItemText
-                style={{
-                  color:
-                    activeMenuItem === "notifications"
-                      ? theme.colors.primary
-                      : "inherit",
-                }}
-              >
-                <NotificationsIcon /> Notifications
-              </ItemText>
-              <NotificationBadge>8</NotificationBadge>
-            </MenuItem>
-          </MenuSection>
-
-          <MenuSection>
-            <SectionTitle>Settings</SectionTitle>
-            <MenuItem
-              onClick={() => setSettingsOpen(!settingsOpen)}
-              className={activeMenuItem === "settings" ? "active" : ""}
-              style={{
-                backgroundColor:
-                  activeMenuItem === "settings"
-                    ? theme.colors.hover
-                    : "transparent",
-              }}
-            >
-              <ItemText
-                style={{
-                  color:
-                    activeMenuItem === "settings"
-                      ? theme.colors.primary
-                      : "inherit",
-                }}
-              >
-                <SettingsIcon /> Settings
-              </ItemText>
-              {settingsOpen ? <ExpandLess /> : <ExpandMore />}
-            </MenuItem>
-            {settingsOpen && (
-              <SubMenu>
-                <MenuItem>
-                  <ItemText>
-                    <SecurityIcon /> Security
-                  </ItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ItemText>
-                    <AccountIcon /> Account
-                  </ItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ItemText>
-                    <ToolsIcon /> Tools
-                  </ItemText>
-                </MenuItem>
-                <MenuItem>
-                  <ItemText>
-                    <HelpIcon /> Help Center
-                  </ItemText>
-                </MenuItem>
-              </SubMenu>
-            )}
-          </MenuSection>
-        </SidebarContainer>
+        <Sidebar
+          activeMenuItem={activeMenuItem}
+          handleMenuItemClick={handleMenuItemClick}
+          analyticsOpen={analyticsOpen}
+          setAnalyticsOpen={setAnalyticsOpen}
+          settingsOpen={settingsOpen}
+          setSettingsOpen={setSettingsOpen}
+        />
       )}
 
       <MainContent>
