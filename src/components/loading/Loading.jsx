@@ -1,19 +1,12 @@
 import { CircularProgress } from "@mui/material";
-import { useState, useEffect } from "react";
 
 import { theme } from "../../styles/theme";
+import useLoadingDots from "../../utils/useLoadingDots";
 
 import { LoadingContainer, TextBold } from "./styles";
 
 const Loading = () => {
-  const [loadingDots, setLoadingDots] = useState(".");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLoadingDots((prev) => (prev.length === 3 ? "." : prev + "."));
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+  const loadingDots = useLoadingDots();
 
   return (
     <LoadingContainer>
@@ -25,7 +18,7 @@ const Loading = () => {
           marginLeft: "20px",
         }}
       >
-        Carregando{loadingDots}
+        Loading{loadingDots}
       </TextBold>
     </LoadingContainer>
   );
