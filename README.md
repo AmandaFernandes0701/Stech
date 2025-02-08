@@ -155,6 +155,8 @@ This project is deployed on Vercel for fast and efficient hosting.
 ### Deployment Steps
 ```
 npm install -g vercel  
+```
+```
 vercel --prod  
 ```
 This enables continuous deployment by integrating with GitHub.
@@ -163,8 +165,14 @@ This enables continuous deployment by integrating with GitHub.
 To set up and run the project locally:
 ```
 git clone <repository-url>
+```
+```
 cd stech
+```
+```
 npm install
+```
+```
 npm run dev
 ```
 
