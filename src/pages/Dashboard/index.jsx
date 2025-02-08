@@ -1,23 +1,15 @@
-import {
-  AccessTime,
-  SwapVert,
-  FilterList,
-  ViewModule,
-  Menu,
-  Search,
-  Menu as MenuIcon,
-  Close as CloseIcon,
-  GetApp,
-} from "@mui/icons-material";
-import { IconButton, Button } from "@mui/material";
+import { AccessTime, Search, GetApp } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { useState, useMemo, useEffect } from "react";
 import Draggable from "react-draggable";
 
+import ControlButtons from "../../components/control-buttons/ControlButtons";
 import EmployeeCard from "../../components/employee-card/EmployeeCard";
 import Loading from "../../components/loading/Loading";
 import Pagination from "../../components/pagination/Pagination";
+import SelectDate from "../../components/select-date/SelectDate";
 import Sidebar from "../../components/sidebar/Sidebar";
-import theme from "../../styles/theme";
+import { generateAttendanceData } from "../../utils/attendanceData";
 import { fetchEmployeeData } from "../../utils/fetchEmployeeData";
 
 import {
@@ -28,10 +20,7 @@ import {
   AttendanceRow,
   AttendanceCard,
   AttendanceHeader,
-  Controls,
   SearchContainer,
-  HamburgerMenu,
-  Overlay,
 } from "./styles";
 
 const formatDate = (date) => {
@@ -47,7 +36,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [analyticsOpen, setAnalyticsOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState("");
 
   const cardsPerPage = 6;
@@ -82,43 +70,7 @@ const Dashboard = () => {
     setActiveMenuItem(menuItem);
   };
 
-  const attendanceData = useMemo(
-    () =>
-      Array(50)
-        .fill({ date: "March 8, 2023", checkIn: "08:53", checkOut: "17:15" })
-        .map((item, index) => ({
-          ...item,
-          date: new Date(2023, 2, 8 + index),
-          status: [
-            {
-              text: "On Time",
-              color: theme.colors.primary,
-              backgroundColor: "rgba(67, 177, 126, 0.15)",
-            },
-            {
-              text: "Late",
-              color: theme.colors.warning,
-              backgroundColor: "rgba(243, 156, 18, 0.15)",
-            },
-            {
-              text: "Absent",
-              color: theme.colors.error,
-              backgroundColor: "rgba(255, 77, 77, 0.15)",
-            },
-            {
-              text: "Early",
-              color: theme.colors.info,
-              backgroundColor: "rgba(74, 144, 226, 0.15)",
-            },
-            {
-              text: "Overtime",
-              color: "#b015ed",
-              backgroundColor: "rgba(176, 21, 237, 0.15)",
-            },
-          ][index % 5],
-        })),
-    []
-  );
+  const attendanceData = useMemo(() => generateAttendanceData(), []);
 
   const sortedAttendanceData = useMemo(
     () => attendanceData.sort((a, b) => a.date - b.date),
@@ -154,24 +106,7 @@ const Dashboard = () => {
   return (
     <Container>
       {isSmallScreen ? (
-        <>
-          <HamburgerMenu onClick={() => setSidebarOpen(!sidebarOpen)}>
-            {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
-          </HamburgerMenu>
-          {sidebarOpen && (
-            <>
-              <Overlay onClick={() => setSidebarOpen(false)} />
-              <Sidebar
-                activeMenuItem={activeMenuItem}
-                handleMenuItemClick={handleMenuItemClick}
-                analyticsOpen={analyticsOpen}
-                setAnalyticsOpen={setAnalyticsOpen}
-                settingsOpen={settingsOpen}
-                setSettingsOpen={setSettingsOpen}
-              />
-            </>
-          )}
-        </>
+        <></>
       ) : (
         <Sidebar
           activeMenuItem={activeMenuItem}
@@ -192,16 +127,19 @@ const Dashboard = () => {
           <Header>
             <p>Employee Details</p>
             <div className="header-right">
-              <select defaultValue="2025">
-                <option value="2025">This Year</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-              </select>
+              <SelectDate
+                defaultValue="2025"
+                options={[
+                  { value: "2025", label: "This Year" },
+                  { value: "2024", label: "2024" },
+                  { value: "2023", label: "2023" },
+                  { value: "2022", label: "2022" },
+                  { value: "2021", label: "2021" },
+                  { value: "2020", label: "2020" },
+                  { value: "2019", label: "2019" },
+                  { value: "2018", label: "2018" },
+                ]}
+              />
               <Button className="download-button" startIcon={<GetApp />}>
                 {isSmallScreen ? "Download" : "Download Info"}
               </Button>
@@ -213,42 +151,11 @@ const Dashboard = () => {
         <AttendanceGrid>
           <AttendanceHeader>
             <p>Attendance History</p>
-            <Controls>
-              <IconButton
-                className={`icon-button ${
-                  activeButtons.includes("viewModule") ? "active" : ""
-                }`}
-                onClick={() => handleFilterButtonClick("viewModule")}
-              >
-                <ViewModule />
-              </IconButton>
-              <IconButton
-                className={`icon-button ${
-                  activeButtons.includes("menu") ? "active" : ""
-                }`}
-                onClick={() => handleFilterButtonClick("menu")}
-              >
-                <Menu />
-              </IconButton>
-              <Button
-                className={`icon-button ${
-                  activeButtons.includes("sort") ? "active" : ""
-                }`}
-                startIcon={<SwapVert />}
-                onClick={() => handleFilterButtonClick("sort")}
-              >
-                {!isSmallScreen && "Sort"}
-              </Button>
-              <Button
-                className={`icon-button ${
-                  activeButtons.includes("filter") ? "active" : ""
-                }`}
-                startIcon={<FilterList />}
-                onClick={() => handleFilterButtonClick("filter")}
-              >
-                {!isSmallScreen && "Filter"}
-              </Button>
-            </Controls>
+            <ControlButtons
+              activeButtons={activeButtons}
+              handleFilterButtonClick={handleFilterButtonClick}
+              isSmallScreen={isSmallScreen}
+            />
           </AttendanceHeader>
           <AttendanceRow>
             {currentCards.map((card, index) => (

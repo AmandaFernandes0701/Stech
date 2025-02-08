@@ -1,4 +1,4 @@
-import { useLoading } from "../../hooks/useLoading";
+import { useLoading } from "../../utils/useLoading";
 
 import { ButtonContainer, SpinnerWrapper } from "./styles";
 
