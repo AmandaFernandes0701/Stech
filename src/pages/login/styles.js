@@ -13,6 +13,10 @@ export const Container = styled.div`
   background: ${theme.colors.inputBackground};
   padding: 0 5%;
 
+  .indent {
+    padding-left: 5px;
+  }
+
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 20px;
