@@ -14,9 +14,8 @@ import {
   BuildOutlined as ToolsIcon,
   ExpandLess,
   ExpandMore,
-  ArrowBack,
-  ArrowForward,
 } from "@mui/icons-material";
+import { PanelLeftClose, PanelRightClose } from "lucide-react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
@@ -204,7 +203,11 @@ const Sidebar = ({
       </SidebarContent>
       <CollapseColumn>
         <CollapseIcon onClick={handleCollapseClick}>
-          {collapsed ? <ArrowForward /> : <ArrowBack />}
+          {collapsed ? (
+            <PanelRightClose strokeWidth={1} />
+          ) : (
+            <PanelLeftClose strokeWidth={1} />
+          )}
         </CollapseIcon>
       </CollapseColumn>
     </SidebarContainer>
