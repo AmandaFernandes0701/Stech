@@ -1,10 +1,6 @@
-import { useLoading } from "../../utils/useLoading";
-
 import { ButtonContainer, SpinnerWrapper } from "./styles";
 
 const Button = ({ onClick, loading, children }) => {
-  const dots = useLoading(loading);
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -22,7 +18,7 @@ const Button = ({ onClick, loading, children }) => {
       {loading ? (
         <SpinnerWrapper>
           <div className="spinner"></div>
-          <span>Logging in{dots}</span>
+          <span>Logging in</span>
         </SpinnerWrapper>
       ) : (
         children
