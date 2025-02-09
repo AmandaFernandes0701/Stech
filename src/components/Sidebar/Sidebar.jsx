@@ -15,7 +15,7 @@ import {
   ExpandLess,
   ExpandMore,
 } from "@mui/icons-material";
-import { PanelRightClose } from "lucide-react";
+import { PanelLeftClose, PanelRightClose } from "lucide-react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
@@ -46,9 +46,20 @@ const Sidebar = ({
     setCollapsed(!collapsed);
   };
 
+  const menuVariants = {
+    open: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    collapsed: { opacity: 0, y: -10, transition: { duration: 0.5 } },
+  };
+
   return (
     <SidebarContainer collapsed={collapsed}>
-      <SidebarContent collapsed={collapsed}>
+      <SidebarContent
+        variants={menuVariants}
+        initial="collapsed"
+        animate={collapsed ? "collapsed" : "open"}
+        exit="collapsed"
+        collapsed={collapsed}
+      >
         <MenuSection>
           <SectionTitle>Main Menu</SectionTitle>
           <MenuItem
@@ -201,9 +212,13 @@ const Sidebar = ({
           )}
         </MenuSection>
       </SidebarContent>
-      <CollapseColumn>
-        <CollapseIcon collapsed={collapsed} onClick={handleCollapseClick}>
-          <PanelRightClose strokeWidth={1} />
+      <CollapseColumn collapsed={collapsed}>
+        <CollapseIcon onClick={handleCollapseClick}>
+          {collapsed ? (
+            <PanelRightClose strokeWidth={1} />
+          ) : (
+            <PanelLeftClose strokeWidth={1} />
+          )}
         </CollapseIcon>
       </CollapseColumn>
     </SidebarContainer>

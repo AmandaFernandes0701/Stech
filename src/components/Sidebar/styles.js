@@ -1,17 +1,20 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 import { theme } from "../../styles/theme";
 
 export const SidebarContainer = styled.div`
   display: flex;
-  width: ${(props) => (props.collapsed ? "auto" : "300px")};
+  position: relative;
+  width: ${(props) => (props.collapsed ? "45px" : "300px")};
   background: #181818;
   color: white;
   height: 100vh;
   font-family: Arial, sans-serif;
   transition: width 0.5s ease;
   padding-top: 25px;
-  padding-right: 10px;
+  padding-right: ${(props) => (props.collapsed ? "0" : "10px")};
+
   @media (max-width: 768px) {
     position: absolute;
     left: ${(props) => (props.isOpen ? "0" : "-300px")};
@@ -20,7 +23,7 @@ export const SidebarContainer = styled.div`
   }
 `;
 
-export const SidebarContent = styled.div`
+export const SidebarContent = styled(motion.div)`
   flex: 1;
   padding: 20px 0px 20px 20px;
   display: ${(props) => (props.collapsed ? "none" : "block")};
@@ -30,15 +33,20 @@ export const CollapseColumn = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background: #181818;
-  margin-top: -10px;
+  background: transparent;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: right 0.5s ease;
+  z-index: 10;
+  cursor: pointer;
 `;
 
 export const CollapseIcon = styled.div`
   display: flex;
-  justify-content: flex-end;
-  background: #181818;
-  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 8px 0px 8px;
   cursor: pointer;
   transition: transform 0.3s ease;
 
@@ -49,16 +57,12 @@ export const CollapseIcon = styled.div`
   svg {
     color: white;
     font-size: 1.5rem;
-    color: white;
-    font-size: 1.5rem;
-    transition: transform 0.5s ease;
-    transform: ${(props) =>
-      props.collapsed ? "rotate(0deg)" : "rotate(180deg)"};
   }
 `;
 
 export const MenuSection = styled.div`
   margin-bottom: 15px;
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 5px;
