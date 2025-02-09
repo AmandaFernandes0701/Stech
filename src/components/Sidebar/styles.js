@@ -6,7 +6,7 @@ import { theme } from "../../styles/theme";
 export const SidebarContainer = styled.div`
   display: flex;
   position: relative;
-  width: ${(props) => (props.collapsed ? "45px" : "300px")};
+  width: ${(props) => (props.collapsed ? "45px" : "250px")};
   background: #181818;
   color: white;
   height: 100vh;

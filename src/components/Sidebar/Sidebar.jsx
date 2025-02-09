@@ -32,24 +32,129 @@ import {
   CollapseIcon,
 } from "./styles";
 
-const Sidebar = ({
+const menus = [
+  {
+    title: "Main Menu",
+    items: [
+      { key: "dashboard", icon: HomeIcon, label: "Dashboard" },
+      {
+        key: "analytics",
+        icon: AnalyticsIcon,
+        label: "Analytics",
+        subItems: [
+          { key: "reports", icon: ReportsIcon, label: "Reports" },
+          { key: "trends", icon: TrendsIcon, label: "Trends" },
+          { key: "overview", icon: OverviewIcon, label: "Overview" },
+        ],
+      },
+      { key: "schedule", icon: ScheduleIcon, label: "Schedule" },
+      { key: "members", icon: MembersIcon, label: "Members" },
+      {
+        key: "notifications",
+        icon: NotificationsIcon,
+        label: "Notifications",
+        badge: 8,
+      },
+    ],
+  },
+  {
+    title: "Settings",
+    items: [
+      { key: "help", icon: HelpIcon, label: "Help Center" },
+      {
+        key: "settings",
+        icon: SettingsIcon,
+        label: "Settings",
+        subItems: [
+          { key: "security", icon: SecurityIcon, label: "Security" },
+          { key: "account", icon: AccountIcon, label: "Account" },
+          { key: "tools", icon: ToolsIcon, label: "Tools" },
+        ],
+      },
+    ],
+  },
+];
+
+const menuVariants = {
+  open: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  collapsed: { opacity: 0, y: -10, transition: { duration: 0.5 } },
+};
+
+const SidebarMenuSection = ({
+  section,
   activeMenuItem,
   handleMenuItemClick,
-  analyticsOpen,
-  setAnalyticsOpen,
-  settingsOpen,
-  setSettingsOpen,
-}) => {
+  collapsed,
+  openStates,
+  setOpenStates,
+}) => (
+  <MenuSection>
+    <SectionTitle>{section.title}</SectionTitle>
+    {section.items.map(({ key, icon: Icon, label, subItems, badge }) => {
+      const isOpen = openStates[key];
+      return (
+        <>
+          <SidebarMenuItem
+            key={key}
+            icon={<Icon style={{ display: collapsed ? "none" : "block" }} />}
+            label={label}
+            isActive={activeMenuItem === key}
+            onClick={() =>
+              subItems
+                ? setOpenStates({ ...openStates, [key]: !isOpen })
+                : handleMenuItemClick(key)
+            }
+            badge={badge}
+            hasSubItems={!!subItems}
+            isOpen={isOpen}
+          />
+          {isOpen && subItems && (
+            <SubMenu>
+              {subItems.map(({ key, icon: SubIcon, label }) => (
+                <SidebarMenuItem
+                  key={key}
+                  icon={
+                    <SubIcon
+                      style={{ display: collapsed ? "none" : "block" }}
+                    />
+                  }
+                  label={label}
+                  isActive={activeMenuItem === key}
+                  onClick={() => handleMenuItemClick(key)}
+                />
+              ))}
+            </SubMenu>
+          )}
+        </>
+      );
+    })}
+  </MenuSection>
+);
+
+const SidebarMenuItem = ({
+  icon,
+  label,
+  isActive,
+  onClick,
+  badge,
+  hasSubItems,
+  isOpen,
+}) => (
+  <MenuItem onClick={onClick} className={isActive ? "active" : ""}>
+    <ItemText>
+      {icon} {label}
+    </ItemText>
+    {badge && <NotificationBadge>{badge}</NotificationBadge>}
+    {hasSubItems && (isOpen ? <ExpandLess /> : <ExpandMore />)}
+  </MenuItem>
+);
+
+const Sidebar = ({ activeMenuItem, handleMenuItemClick }) => {
   const [collapsed, setCollapsed] = useState(false);
-
-  const handleCollapseClick = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const menuVariants = {
-    open: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    collapsed: { opacity: 0, y: -10, transition: { duration: 0.5 } },
-  };
+  const [openStates, setOpenStates] = useState({
+    analytics: false,
+    settings: false,
+  });
 
   return (
     <SidebarContainer collapsed={collapsed}>
@@ -60,160 +165,20 @@ const Sidebar = ({
         exit="collapsed"
         collapsed={collapsed}
       >
-        <MenuSection>
-          <SectionTitle>Main Menu</SectionTitle>
-          <MenuItem
-            onClick={() => handleMenuItemClick("dashboard")}
-            className={activeMenuItem === "dashboard" ? "active" : ""}
-          >
-            <ItemText>
-              <HomeIcon style={{ display: collapsed ? "none" : "block" }} />{" "}
-              Dashboard
-            </ItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => setAnalyticsOpen(!analyticsOpen)}
-            className={activeMenuItem === "analytics" ? "active" : ""}
-          >
-            <ItemText>
-              <AnalyticsIcon
-                style={{ display: collapsed ? "none" : "block" }}
-              />{" "}
-              Analytics
-            </ItemText>
-            {analyticsOpen ? <ExpandLess /> : <ExpandMore />}
-          </MenuItem>
-          {analyticsOpen && (
-            <SubMenu>
-              <MenuItem
-                onClick={() => handleMenuItemClick("reports")}
-                className={activeMenuItem === "reports" ? "active" : ""}
-              >
-                <ItemText>
-                  <ReportsIcon
-                    style={{ display: collapsed ? "none" : "block" }}
-                  />{" "}
-                  Reports
-                </ItemText>
-              </MenuItem>
-              <MenuItem
-                onClick={() => handleMenuItemClick("trends")}
-                className={activeMenuItem === "trends" ? "active" : ""}
-              >
-                <ItemText>
-                  <TrendsIcon
-                    style={{ display: collapsed ? "none" : "block" }}
-                  />{" "}
-                  Trends
-                </ItemText>
-              </MenuItem>
-              <MenuItem
-                onClick={() => handleMenuItemClick("overview")}
-                className={activeMenuItem === "overview" ? "active" : ""}
-              >
-                <ItemText>
-                  <OverviewIcon
-                    style={{ display: collapsed ? "none" : "block" }}
-                  />{" "}
-                  Overview
-                </ItemText>
-              </MenuItem>
-            </SubMenu>
-          )}
-          <MenuItem
-            onClick={() => handleMenuItemClick("schedule")}
-            className={activeMenuItem === "schedule" ? "active" : ""}
-          >
-            <ItemText>
-              <ScheduleIcon style={{ display: collapsed ? "none" : "block" }} />{" "}
-              Schedule
-            </ItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleMenuItemClick("members")}
-            className={activeMenuItem === "members" ? "active" : ""}
-          >
-            <ItemText>
-              <MembersIcon style={{ display: collapsed ? "none" : "block" }} />{" "}
-              Members
-            </ItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleMenuItemClick("notifications")}
-            className={activeMenuItem === "notifications" ? "active" : ""}
-          >
-            <ItemText>
-              <NotificationsIcon
-                style={{ display: collapsed ? "none" : "block" }}
-              />{" "}
-              Notifications
-            </ItemText>
-            <NotificationBadge>8</NotificationBadge>
-          </MenuItem>
-        </MenuSection>
-
-        <MenuSection>
-          <SectionTitle>Settings</SectionTitle>
-          <MenuItem
-            onClick={() => handleMenuItemClick("help")}
-            className={activeMenuItem === "help" ? "active" : ""}
-          >
-            <ItemText>
-              <HelpIcon style={{ display: collapsed ? "none" : "block" }} />{" "}
-              Help Center
-            </ItemText>
-          </MenuItem>
-          <MenuItem
-            onClick={() => setSettingsOpen(!settingsOpen)}
-            className={activeMenuItem === "settings" ? "active" : ""}
-          >
-            <ItemText>
-              <SettingsIcon style={{ display: collapsed ? "none" : "block" }} />{" "}
-              Settings
-            </ItemText>
-            {settingsOpen ? <ExpandLess /> : <ExpandMore />}
-          </MenuItem>
-          {settingsOpen && (
-            <SubMenu>
-              <MenuItem
-                onClick={() => handleMenuItemClick("security")}
-                className={activeMenuItem === "security" ? "active" : ""}
-              >
-                <ItemText>
-                  <SecurityIcon
-                    style={{ display: collapsed ? "none" : "block" }}
-                  />{" "}
-                  Security
-                </ItemText>
-              </MenuItem>
-              <MenuItem
-                onClick={() => handleMenuItemClick("account")}
-                className={activeMenuItem === "account" ? "active" : ""}
-              >
-                <ItemText>
-                  <AccountIcon
-                    style={{ display: collapsed ? "none" : "block" }}
-                  />{" "}
-                  Account
-                </ItemText>
-              </MenuItem>
-              <MenuItem
-                onClick={() => handleMenuItemClick("tools")}
-                className={activeMenuItem === "tools" ? "active" : ""}
-              >
-                <ItemText>
-                  <ToolsIcon
-                    style={{ display: collapsed ? "none" : "block" }}
-                  />{" "}
-                  Tools
-                </ItemText>
-              </MenuItem>
-            </SubMenu>
-          )}
-        </MenuSection>
+        {menus.map((section) => (
+          <SidebarMenuSection
+            key={section.title}
+            section={section}
+            activeMenuItem={activeMenuItem}
+            handleMenuItemClick={handleMenuItemClick}
+            collapsed={collapsed}
+            openStates={openStates}
+            setOpenStates={setOpenStates}
+          />
+        ))}
       </SidebarContent>
       <CollapseColumn collapsed={collapsed}>
-        <CollapseIcon onClick={handleCollapseClick}>
+        <CollapseIcon onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? (
             <PanelRightClose strokeWidth={1} />
           ) : (
@@ -228,10 +193,6 @@ const Sidebar = ({
 Sidebar.propTypes = {
   activeMenuItem: PropTypes.string.isRequired,
   handleMenuItemClick: PropTypes.func.isRequired,
-  analyticsOpen: PropTypes.bool.isRequired,
-  setAnalyticsOpen: PropTypes.func.isRequired,
-  settingsOpen: PropTypes.bool.isRequired,
-  setSettingsOpen: PropTypes.func.isRequired,
 };
 
 export default Sidebar;
