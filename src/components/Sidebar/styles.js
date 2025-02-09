@@ -31,7 +31,7 @@ export const CollapseColumn = styled.div`
   align-items: flex-start;
   justify-content: center;
   background: #181818;
-  margin-top: -10px; /* Move the icon a bit higher */
+  margin-top: -10px;
 `;
 
 export const CollapseIcon = styled.div`
@@ -48,7 +48,12 @@ export const CollapseIcon = styled.div`
 
   svg {
     color: white;
-    font-size: 1.5rem; /* Smaller icon size */
+    font-size: 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.5s ease;
+    transform: ${(props) =>
+      props.collapsed ? "rotate(0deg)" : "rotate(180deg)"};
   }
 `;
 
