@@ -16,7 +16,7 @@ export const SidebarContainer = styled.div`
   padding-right: ${(props) => (props.collapsed ? "0" : "10px")};
 
   @media (max-width: 768px) {
-    position: absolute;
+    position: fixed;
     height: ${(props) => (props.collapsed ? "50px" : "auto")};
     width: -webkit-fill-available;
     z-index: 1000;
