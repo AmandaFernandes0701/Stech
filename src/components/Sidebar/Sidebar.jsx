@@ -32,6 +32,7 @@ import {
   SubMenu,
   NotificationBadge,
   CollapseIcon,
+  SidebarOverlay,
 } from "./styles";
 
 const menus = [
@@ -169,44 +170,51 @@ const Sidebar = ({
   }, [isSmallScreen]);
 
   return (
-    <SidebarContainer collapsed={collapsed}>
-      {closeSidebar && (
-        <button
-          onClick={closeSidebar}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            background: "none",
-            border: "none",
-            color: "white",
-            fontSize: "24px",
-            cursor: "pointer",
-          }}
-        >
-          &times;
-        </button>
+    <>
+      {isSmallScreen && !collapsed && (
+        <SidebarOverlay onClick={() => setCollapsed(true)} />
       )}
 
-      <SidebarContent
-        variants={menuVariants}
-        initial="collapsed"
-        animate={collapsed ? "collapsed" : "open"}
-        exit="collapsed"
-        collapsed={collapsed}
-      >
-        {menus.map((section) => (
-          <SidebarMenuSection
-            key={section.title}
-            section={section}
-            activeMenuItem={activeMenuItem}
-            handleMenuItemClick={handleMenuItemClick}
-            collapsed={collapsed}
-            openStates={openStates}
-            setOpenStates={setOpenStates}
-          />
-        ))}
-      </SidebarContent>
+      <SidebarContainer collapsed={collapsed}>
+        {closeSidebar && (
+          <button
+            onClick={closeSidebar}
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              background: "none",
+              border: "none",
+              color: "white",
+              fontSize: "24px",
+              cursor: "pointer",
+            }}
+          >
+            &times;
+          </button>
+        )}
+
+        <SidebarContent
+          variants={menuVariants}
+          initial="collapsed"
+          animate={collapsed ? "collapsed" : "open"}
+          exit="collapsed"
+          collapsed={collapsed}
+        >
+          {menus.map((section) => (
+            <SidebarMenuSection
+              key={section.title}
+              section={section}
+              activeMenuItem={activeMenuItem}
+              handleMenuItemClick={handleMenuItemClick}
+              collapsed={collapsed}
+              openStates={openStates}
+              setOpenStates={setOpenStates}
+            />
+          ))}
+        </SidebarContent>
+      </SidebarContainer>
+
       <CollapseColumn
         collapsed={collapsed}
         style={
@@ -229,7 +237,7 @@ const Sidebar = ({
           )}
         </CollapseIcon>
       </CollapseColumn>
-    </SidebarContainer>
+    </>
   );
 };
 
