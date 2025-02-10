@@ -19,7 +19,7 @@ import {
 } from "@mui/icons-material";
 import { PanelLeftClose, PanelRightClose } from "lucide-react";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   SidebarContainer,
@@ -156,11 +156,17 @@ const Sidebar = ({
   closeSidebar,
   isSmallScreen,
 }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(isSmallScreen);
   const [openStates, setOpenStates] = useState({
     analytics: false,
     settings: false,
   });
+
+  useEffect(() => {
+    if (!isSmallScreen) {
+      setCollapsed(false);
+    }
+  }, [isSmallScreen]);
 
   return (
     <SidebarContainer collapsed={collapsed}>
