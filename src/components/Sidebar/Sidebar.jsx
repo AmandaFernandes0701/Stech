@@ -14,6 +14,8 @@ import {
   BuildOutlined as ToolsIcon,
   ExpandLess,
   ExpandMore,
+  MenuOutlined,
+  CloseOutlined,
 } from "@mui/icons-material";
 import { PanelLeftClose, PanelRightClose } from "lucide-react";
 import PropTypes from "prop-types";
@@ -93,9 +95,8 @@ const SidebarMenuSection = ({
     {section.items.map(({ key, icon: Icon, label, subItems, badge }) => {
       const isOpen = openStates[key];
       return (
-        <>
+        <div key={key}>
           <SidebarMenuItem
-            key={key}
             icon={<Icon style={{ display: collapsed ? "none" : "block" }} />}
             label={label}
             isActive={activeMenuItem === key}
@@ -125,7 +126,7 @@ const SidebarMenuSection = ({
               ))}
             </SubMenu>
           )}
-        </>
+        </div>
       );
     })}
   </MenuSection>
@@ -149,7 +150,12 @@ const SidebarMenuItem = ({
   </MenuItem>
 );
 
-const Sidebar = ({ activeMenuItem, handleMenuItemClick }) => {
+const Sidebar = ({
+  activeMenuItem,
+  handleMenuItemClick,
+  closeSidebar,
+  isSmallScreen,
+}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [openStates, setOpenStates] = useState({
     analytics: false,
@@ -158,6 +164,24 @@ const Sidebar = ({ activeMenuItem, handleMenuItemClick }) => {
 
   return (
     <SidebarContainer collapsed={collapsed}>
+      {closeSidebar && (
+        <button
+          onClick={closeSidebar}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            background: "none",
+            border: "none",
+            color: "white",
+            fontSize: "24px",
+            cursor: "pointer",
+          }}
+        >
+          &times;
+        </button>
+      )}
+
       <SidebarContent
         variants={menuVariants}
         initial="collapsed"
@@ -177,9 +201,22 @@ const Sidebar = ({ activeMenuItem, handleMenuItemClick }) => {
           />
         ))}
       </SidebarContent>
-      <CollapseColumn collapsed={collapsed}>
+      <CollapseColumn
+        collapsed={collapsed}
+        style={
+          isSmallScreen
+            ? { justifyContent: "center", alignItems: "center" }
+            : {}
+        }
+      >
         <CollapseIcon onClick={() => setCollapsed(!collapsed)}>
-          {collapsed ? (
+          {isSmallScreen ? (
+            collapsed ? (
+              <MenuOutlined />
+            ) : (
+              <CloseOutlined />
+            )
+          ) : collapsed ? (
             <PanelRightClose strokeWidth={1} />
           ) : (
             <PanelLeftClose strokeWidth={1} />
@@ -192,7 +229,9 @@ const Sidebar = ({ activeMenuItem, handleMenuItemClick }) => {
 
 Sidebar.propTypes = {
   activeMenuItem: PropTypes.string.isRequired,
+  isSmallScreen: PropTypes.bool.isRequired,
   handleMenuItemClick: PropTypes.func.isRequired,
+  closeSidebar: PropTypes.func,
 };
 
 export default Sidebar;

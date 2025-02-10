@@ -71,7 +71,6 @@ const Dashboard = () => {
   };
 
   const attendanceData = useMemo(() => generateAttendanceData(), []);
-
   const sortedAttendanceData = useMemo(
     () => attendanceData.sort((a, b) => a.date - b.date),
     [attendanceData]
@@ -105,18 +104,15 @@ const Dashboard = () => {
 
   return (
     <Container>
-      {isSmallScreen ? (
-        <></>
-      ) : (
-        <Sidebar
-          activeMenuItem={activeMenuItem}
-          handleMenuItemClick={handleMenuItemClick}
-          analyticsOpen={analyticsOpen}
-          setAnalyticsOpen={setAnalyticsOpen}
-          settingsOpen={settingsOpen}
-          setSettingsOpen={setSettingsOpen}
-        />
-      )}
+      <Sidebar
+        activeMenuItem={activeMenuItem}
+        handleMenuItemClick={handleMenuItemClick}
+        analyticsOpen={analyticsOpen}
+        setAnalyticsOpen={setAnalyticsOpen}
+        settingsOpen={settingsOpen}
+        setSettingsOpen={setSettingsOpen}
+        isSmallScreen={isSmallScreen}
+      />
 
       <MainContent>
         <SearchContainer>

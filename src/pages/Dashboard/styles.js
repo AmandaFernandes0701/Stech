@@ -19,7 +19,7 @@ export const MainContent = styled.div`
   padding: 20px;
 
   @media (max-width: 768px) {
-    padding: 10px;
+    padding: 70px 10px 10px 10px;
   }
 `;
 
@@ -425,6 +425,10 @@ export const SearchContainer = styled.div`
   align-items: center;
   width: 250px;
 
+  @media (max-width: 769px) {
+    width: 100%;
+  }
+
   input {
     width: 100%;
     padding: 5px 10px;
@@ -443,6 +447,7 @@ export const SearchContainer = styled.div`
 
     @media (max-width: 769px) {
       margin-left: 20px;
+      margin-right: 20px;
       font-size: 14px;
     }
   }

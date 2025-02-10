@@ -17,8 +17,8 @@ export const SidebarContainer = styled.div`
 
   @media (max-width: 768px) {
     position: absolute;
-    left: ${(props) => (props.isOpen ? "0" : "-300px")};
-    transition: left 0.5s ease, width 0.5s ease;
+    height: ${(props) => (props.collapsed ? "50px" : "auto")};
+    width: -webkit-fill-available;
     z-index: 1000;
   }
 `;
@@ -40,6 +40,10 @@ export const CollapseColumn = styled.div`
   transition: right 0.5s ease;
   z-index: 10;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    height: 45px;
+  }
 `;
 
 export const CollapseIcon = styled.div`
@@ -57,6 +61,10 @@ export const CollapseIcon = styled.div`
   svg {
     color: white;
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 15px;
   }
 `;
 
