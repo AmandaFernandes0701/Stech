@@ -24,6 +24,12 @@ const InputField = ({
     setShowPassword(!showPassword);
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const paste = e.clipboardData.getData("text").replace(/\s/g, "");
+    e.currentTarget.setRangeText(paste);
+  };
+
   return (
     <Container>
       <Text>{label}</Text>
@@ -33,18 +39,25 @@ const InputField = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          maskModified={type === "password" && !showPassword}
+          maskModified={
+            type === "password" && !showPassword && value.trim().length > 0
+          }
           style={{
             borderColor: error ? "red" : "",
             backgroundColor: error ? "#ffe6e6" : "",
             color: error ? "black" : "",
           }}
           onKeyDown={(e) => {
+            if (e.key === " ") {
+              e.preventDefault();
+              return;
+            }
             if (e.key === "Enter") {
               e.preventDefault();
               onEnterPress();
             }
           }}
+          onPaste={handlePaste}
         />
         {type === "password" && (
           <EyeIcon onClick={handleTogglePassword}>

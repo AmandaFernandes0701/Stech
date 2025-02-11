@@ -38,6 +38,7 @@ export const Input = styled.input`
       &::placeholder {
          letter-spacing: 0;
          font-size: ${theme.fontSizes.text};
+         font-weight: 500;
       }
   `}
 `;
@@ -49,6 +50,11 @@ export const EyeIcon = styled.div`
   transform: translateY(-50%);
   color: #777;
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Text = styled.p`
