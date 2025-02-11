@@ -23,13 +23,17 @@ export const ArrowButton = styled.div`
   background: ${theme.colors.cardBackground};
   color: ${theme.colors.cardText};
   border-radius: ${theme.borderRadius};
-  padding: 6px 20px;
+  padding: 10px 30px;
   cursor: pointer;
   transition: background 0.3s ease, color 0.3s ease;
 
   &:hover {
     background: ${theme.colors.buttonHover};
     color: ${theme.colors.buttonTextHover};
+  }
+
+  @media (max-width: 1450px) {
+    padding: 5px 25px;
   }
 `;
 
@@ -46,37 +50,37 @@ export const InnerCard = styled.div`
   border-radius: 0px 40px 30px 15px;
   font-size: 14px;
   font-weight: bold;
-  height: 180px;
+  height: 220px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
 
-  @media (max-width: 1290px) {
-    height: 250px;
-  }
-
-  @media (max-width: 1200px) {
-    height: 150px;
-  }
-
   .circle-container {
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
       display: none;
     }
   }
 
+  @media (max-width: 1400px) {
+    height: 240px;
+  }
+
+  @media (max-width: 1300px) {
+    height: 210px;
+  }
+
   .circle {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     margin-left: 10px;
     border-radius: 50%;
     overflow: hidden;
     background-color: white;
 
     @media (max-width: 1226px) {
-      width: 125px;
-      height: 125px;
+      width: 130px;
+      height: 130px;
     }
 
     @media (max-width: 1200px) {
@@ -157,20 +161,23 @@ export const WhiteCircle = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  height: 75px;
-  width: 75px;
-  bottom: 145px;
-  left: 145px;
+  height: 90px;
+  width: 90px;
+  bottom: 175px;
+  left: 185px;
   border-radius: 50%;
   position: relative;
   z-index: 2;
 
-  @media (max-width: 1290px) {
+  @media (max-width: 1400px) {
+    height: 80px;
+    width: 80px;
     bottom: 180px;
+    left: 180px;
   }
 
-  @media (max-width: 1200px) {
-    bottom: 125px;
-    left: 15px;
+  @media (max-width: 1300px) {
+    bottom: 160px;
+    left: 20px;
   }
 `;

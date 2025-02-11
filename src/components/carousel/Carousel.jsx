@@ -107,8 +107,8 @@ const Carousel = () => {
               style={{
                 position: "relative",
                 right: "20px",
-                width: "120px",
-                height: "120px",
+                width: "150px",
+                height: "150px",
               }}
             >
               <img
