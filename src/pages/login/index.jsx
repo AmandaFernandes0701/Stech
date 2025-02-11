@@ -31,89 +31,112 @@ import {
   ValidPasswordDiv,
 } from "./styles";
 
+const PasswordTooltip = () => (
+  <Tooltip className="tooltip">
+    <ul>
+      <li>
+        <strong>Must contain at least:</strong>
+      </li>
+      <li>- 6 characters long</li>
+      <li>- 1 uppercase letter</li>
+      <li>- 1 lowercase letter</li>
+      <li>- 1 number</li>
+      <li>- 1 special character</li>
+    </ul>
+  </Tooltip>
+);
+
+const socialIcons = [
+  { Icon: GoogleIcon, key: "google" },
+  { Icon: GitHubIcon, key: "github" },
+  { Icon: FacebookIcon, key: "facebook" },
+];
+
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const carouselSlides = useCarouselContent();
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    showPassword: false,
+    emailError: "",
+    passwordError: "",
+    loading: false,
+  });
+
+  const LOGIN_DELAY = 1500;
+
+  const updateForm = (field, value) => {
+    setForm((prevForm) => ({ ...prevForm, [field]: value }));
+  };
 
   const handleLogin = () => {
-    const emailValidationError = validateEmail(email);
-    const passwordValidationError = validatePassword(password);
+    const emailValidationError = validateEmail(form.email);
+    const passwordValidationError = validatePassword(form.password);
 
     if (emailValidationError || passwordValidationError) {
-      setEmailError(emailValidationError);
-      setPasswordError(passwordValidationError);
-    } else {
-      setEmailError("");
-      setPasswordError("");
-      setLoading(true);
-      toast.success("Login successful!");
-      setTimeout(() => {
-        setLoading(false);
-        navigate("/dashboard");
-      }, 1500);
+      updateForm("emailError", emailValidationError);
+      updateForm("passwordError", passwordValidationError);
+      return;
     }
+
+    updateForm("emailError", "");
+    updateForm("passwordError", "");
+    updateForm("loading", true);
+    toast.success("Login successful!");
+
+    setTimeout(() => {
+      updateForm("loading", false);
+      navigate("/dashboard");
+    }, LOGIN_DELAY);
   };
+
+  const renderPasswordLabel = () => (
+    <div style={{ display: "flex", alignItems: "flex-end" }}>
+      <span>Password</span>
+      <ForgotPassword>
+        <InfoIcon
+          fontSize="small"
+          style={{
+            fill: "none",
+            stroke: "white",
+            marginLeft: "5px",
+            fontSize: "16px",
+          }}
+        />
+        <PasswordTooltip />
+      </ForgotPassword>
+    </div>
+  );
 
   return (
     <Container>
       <Form>
         <div>
-          <Title isWelcomeBack={true}>Welcome Back</Title>
+          <Title isWelcomeBack>Welcome Back</Title>
           <Subtitle>Please Enter your Account details</Subtitle>
         </div>
         <InputField
           type="email"
           label="Email"
           placeholder="example@domain.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={emailError}
+          value={form.email}
+          onChange={(e) => updateForm("email", e.target.value)}
+          error={form.emailError}
           onEnterPress={handleLogin}
         />
-
         <ValidPasswordDiv>
           <InputField
             type="password"
-            label={
-              <div style={{ display: "flex", alignItems: "flex-end" }}>
-                Password
-                <ForgotPassword>
-                  <InfoIcon
-                    fontSize="small"
-                    style={{
-                      fill: "none",
-                      stroke: "white",
-                      marginLeft: "5px",
-                      fontSize: "16px",
-                    }}
-                  />
-                  <Tooltip className="tooltip">
-                    <ul>
-                      <p>
-                        <strong>Must contain at least:</strong>
-                      </p>
-                      <p className="indent"> - 6 characters long</p>
-                      <p className="indent"> - 1 uppercase letter</p>
-                      <p className="indent"> - 1 lowercase letter</p>
-                      <p className="indent"> - 1 number</p>
-                      <p className="indent"> - 1 special character</p>
-                    </ul>
-                  </Tooltip>
-                </ForgotPassword>
-              </div>
-            }
+            label={renderPasswordLabel()}
             placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={passwordError}
+            value={form.password}
+            onChange={(e) => updateForm("password", e.target.value)}
+            error={form.passwordError}
             onEnterPress={handleLogin}
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
+            showPassword={form.showPassword}
+            setShowPassword={(value) => updateForm("showPassword", value)}
           />
         </ValidPasswordDiv>
         <div
@@ -121,23 +144,17 @@ const Login = () => {
         >
           <ForgotPasswordLink>Forgot your Password?</ForgotPasswordLink>
         </div>
-        <Button onClick={handleLogin} loading={loading}>
+        <Button onClick={handleLogin} loading={form.loading}>
           Sign in
         </Button>
-
         <SocialLogin>
-          <div className="icon">
-            <GoogleIcon fontSize="large" />
-          </div>
-          <div className="icon">
-            <GitHubIcon fontSize="large" />
-          </div>
-          <div className="icon">
-            <FacebookIcon fontSize="large" />
-          </div>
+          {socialIcons.map(({ Icon, key }) => (
+            <div className="icon" key={key}>
+              <Icon fontSize="large" />
+            </div>
+          ))}
         </SocialLogin>
       </Form>
-
       <TestimonialSection>
         <motion.div
           initial={{ opacity: 0 }}
@@ -155,11 +172,12 @@ const Login = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
           >
-            <Text>Search and find your dream job is now easier than ever.</Text>
+            <Text>
+              Searching and finding your dream job is now easier than ever.
+            </Text>
             <Text>Just browse a job and apply if you need to.</Text>
           </MotionDiv>
-
-          <Carousel slides={useCarouselContent} />
+          <Carousel slides={carouselSlides} />
         </TestimonialCard>
       </TestimonialSection>
     </Container>
