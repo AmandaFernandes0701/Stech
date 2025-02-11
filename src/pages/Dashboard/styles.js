@@ -4,6 +4,13 @@ import { theme } from "../../styles/theme";
 
 export const Container = styled.div`
   display: flex;
+  background: ${theme.colors.formBackground};
+
+  @media (min-width: 768px) {
+    height: ${({ isFewCards }) =>
+      isFewCards ? "-webkit-fill-available" : "fit-content"};
+    height: fill-available;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -13,8 +20,8 @@ export const Container = styled.div`
 export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
+  height: fit-content;
   flex: 1;
-  background: ${theme.colors.formBackground};
   padding: 20px;
 
   @media (max-width: 768px) {

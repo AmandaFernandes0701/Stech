@@ -7,7 +7,7 @@ export const SidebarContainer = styled.div`
   display: flex;
   position: relative;
   width: ${(props) => (props.collapsed ? "45px" : "250px")};
-  background: #181818;
+  background: ${theme.colors.formBackground};
   color: white;
   font-family: Arial, sans-serif;
   transition: width 0.5s ease;

@@ -103,7 +103,7 @@ const Dashboard = () => {
   }
 
   return (
-    <Container>
+    <Container isFewCards={currentCards.length <= 3}>
       <Sidebar
         activeMenuItem={activeMenuItem}
         handleMenuItemClick={handleMenuItemClick}
@@ -114,7 +114,7 @@ const Dashboard = () => {
         isSmallScreen={isSmallScreen}
       />
 
-      <MainContent>
+      <MainContent isFewCards={currentCards.length <= 3}>
         <SearchContainer>
           <Search className="search-icon" />
           <input type="text" placeholder="Search here..." />
