@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,8 +21,31 @@ export const Container = styled.div`
   .indent {
     padding-left: 5px;
   }
-`;
 
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      ${theme.colors.primary} 5%,
+      ${theme.colors.inputBackground} 70%
+    );
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+
+    @media (max-width: 1000px) {
+      width: 100vw;
+      height: 100vw;
+    }
+  }
+`;
 export const Form = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,6 +55,7 @@ export const Form = styled.div`
   padding: 40px;
   width: 100%;
   max-width: 500px;
+  z-index: 1;
 
   @media (max-width: 1100px) {
     width: 70%;
@@ -104,7 +129,7 @@ export const ForgotPasswordLink = styled.p`
   align-self: flex-end;
   font-size: 14px;
   padding-right: 8px;
-  color: ${theme.colors.primary};
+  color: white;
   float: right;
   text-decoration: none;
 
@@ -143,7 +168,7 @@ export const SocialLogin = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
   gap: 20px;
 
   .icon {
@@ -160,12 +185,6 @@ export const SocialLogin = styled.div`
 
     svg {
       font-size: 40px;
-    }
-
-    @media (max-width: 768px) {
-      svg {
-        font-size: 35px;
-      }
     }
   }
 `;
@@ -201,6 +220,7 @@ export const TestimonialDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
+  z-index: 1;
 
   @media (max-width: 1800px) {
     width: 100%;

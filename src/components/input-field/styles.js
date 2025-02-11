@@ -16,11 +16,12 @@ export const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
   margin: 10px 0;
-  background: #121212;
-  border: 1px solid ${theme.colors.inputBorder};
+  background-color: white;
+  height: 50px;
+  border: 2px solid ${theme.colors.inputBorder};
   border-radius: ${theme.borderRadius};
   font-size: ${theme.fontSizes.text};
-  color: ${theme.colors.text};
+  color: black;
   padding-right: 40px;
 
   &:focus {

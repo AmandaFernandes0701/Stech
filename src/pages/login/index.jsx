@@ -101,7 +101,6 @@ const Login = () => {
     updateForm("passwordError", "");
     updateForm("loading", true);
     toast.success("Login successful!");
-
     setTimeout(() => {
       updateForm("loading", false);
       navigate("/dashboard");

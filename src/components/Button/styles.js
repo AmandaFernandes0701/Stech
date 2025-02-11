@@ -14,10 +14,10 @@ export const ButtonContainer = styled.button`
   font-weight: 600;
   border: none;
   border-radius: ${borderRadius};
-  margin-top: 20px;
+  margin-top: 40px;
   cursor: ${(props) => (props.loading ? "not-allowed" : "pointer")};
   transition: background-color 0.3s ease;
-  height: 40px;
+  height: 50px;
 
   &:hover {
     background-color: ${colors.primaryDark};
