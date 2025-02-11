@@ -3,7 +3,12 @@ import AutoAwesome from "@mui/icons-material/AutoAwesome";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-import { Text, TextBold, MotionDiv } from "../../pages/login/styles";
+import {
+  Text,
+  TextBold,
+  MotionDiv,
+  TextCarousel,
+} from "../../pages/login/styles";
 import { useCarouselContent } from "../../utils/carouselContent";
 import Loading from "../loading/Loading";
 
@@ -86,7 +91,7 @@ const Carousel = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.3 }}
               >
-                <Text>{line}</Text>
+                <TextCarousel>{line}</TextCarousel>
               </motion.div>
             ))}
           </motion.div>

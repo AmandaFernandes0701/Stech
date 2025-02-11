@@ -7,16 +7,6 @@ export const ArrowsContainer = styled.div`
   gap: 10px;
   margin-bottom: 30px;
   margin-left: 20px;
-
-  @media (max-width: 1200px) {
-    margin-top: 20px;
-    margin-left: 0px;
-    justify-content: center;
-  }
-
-  @media (max-width: 950px) {
-    justify-content: center;
-  }
 `;
 
 export const ArrowButton = styled.div`

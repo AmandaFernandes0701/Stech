@@ -171,20 +171,29 @@ export const SocialLogin = styled.div`
 `;
 
 export const Text = styled.p`
+  font-size: 16px !important;
+  font-weight: 500 !important;
+
+  @media (max-width: 1450px) {
+    font-size: 14px !important;
+  }
+`;
+
+export const TextCarousel = styled.p`
   font-size: 14px !important;
   font-weight: 500 !important;
+
+  @media (max-width: 1450px) {
+    font-size: 12px !important;
+  }
 `;
 
 export const TextBold = styled.p`
   font-size: 24px !important;
   font-weight: bold !important;
 
-  @media (max-width: 768px) {
-    font-size: 20px !important;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 18px !important;
+  @media (max-width: 1350px) {
+    font-size: 22px !important;
   }
 `;
 
@@ -242,8 +251,16 @@ export const BlackCircle = styled.div`
   border-radius: 0px 0px 0px 50%;
   position: relative;
   top: 0;
-  left: -55px;
+  right: 55px;
   z-index: 1;
+
+  @media (max-width: 1190px) {
+    right: 53px;
+  }
+
+  @media (max-width: 1150px) {
+    right: 50px;
+  }
 `;
 
 export const TestimonialCard = styled.div`
