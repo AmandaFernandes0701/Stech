@@ -28,6 +28,18 @@ export const Input = styled.input`
     outline: none;
     border-color: ${theme.colors.primary};
   }
+
+  ${(props) =>
+    props.maskModified &&
+    `
+      letter-spacing: 0.2em;
+      font-size: calc(${theme.fontSizes.text} * 1.3);
+      font-weight: bold;
+      &::placeholder {
+         letter-spacing: 0;
+         font-size: ${theme.fontSizes.text};
+      }
+  `}
 `;
 
 export const EyeIcon = styled.div`

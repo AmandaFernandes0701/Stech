@@ -18,7 +18,7 @@ const Button = ({ onClick, loading, children }) => {
       {loading ? (
         <SpinnerWrapper>
           <div className="spinner"></div>
-          <span>Logging in</span>
+          <p>Logging in</p>
         </SpinnerWrapper>
       ) : (
         children

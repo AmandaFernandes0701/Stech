@@ -19,35 +19,42 @@ const InputField = ({
   setShowPassword,
   label,
   onEnterPress,
-}) => (
-  <Container>
-    <Text>{label}</Text>
-    <InputWrapper>
-      <Input
-        type={type === "password" && showPassword ? "text" : type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        style={{
-          borderColor: error ? "red" : "",
-          backgroundColor: error ? "#ffe6e6" : "",
-          color: error ? "black" : "",
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            onEnterPress();
-          }
-        }}
-      />
-      {type === "password" && (
-        <EyeIcon onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? <Visibility /> : <VisibilityOff />}
-        </EyeIcon>
-      )}
-    </InputWrapper>
-    {error && <ErrorMessage>{error}</ErrorMessage>}
-  </Container>
-);
+}) => {
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  return (
+    <Container>
+      <Text>{label}</Text>
+      <InputWrapper>
+        <Input
+          type={type === "password" && showPassword ? "text" : type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          maskModified={type === "password" && !showPassword}
+          style={{
+            borderColor: error ? "red" : "",
+            backgroundColor: error ? "#ffe6e6" : "",
+            color: error ? "black" : "",
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              onEnterPress();
+            }
+          }}
+        />
+        {type === "password" && (
+          <EyeIcon onClick={handleTogglePassword}>
+            {showPassword ? <Visibility /> : <VisibilityOff />}
+          </EyeIcon>
+        )}
+      </InputWrapper>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+    </Container>
+  );
+};
 
 export default InputField;

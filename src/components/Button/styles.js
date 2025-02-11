@@ -47,9 +47,8 @@ export const SpinnerWrapper = styled.div`
     }
   }
 
-  span {
-    margin-left: 10px;
-    font-size: ${fontSizes.small};
+  p {
+    margin-left: 8px;
     color: ${colors.spinnerBorder};
   }
 `;
