@@ -33,24 +33,20 @@ export const Form = styled.div`
   max-width: 500px;
 
   @media (max-width: 1100px) {
-    width: 48%;
+    width: 70%;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 15px;
   }
 `;
 
 export const Title = styled.h1`
   font-size: 35px;
-
-  @media (max-width: 768px) {
-    font-size: 28px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 24px;
-  }
 `;
 
 export const TitleTestimonial = styled.h1`
@@ -89,10 +85,6 @@ export const Subtitle = styled.p`
 
   @media (max-width: 768px) {
     font-size: ${theme.fontSizes.small};
-  }
-
-  @media (max-width: 480px) {
-    font-size: 12px;
   }
 `;
 
@@ -186,7 +178,7 @@ export const SocialLogin = styled.div`
 
     @media (max-width: 768px) {
       svg {
-        font-size: 30px;
+        font-size: 35px;
       }
     }
   }
@@ -222,7 +214,11 @@ export const TextBold = styled.p`
 export const TestimonialDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 85vh;
+  width: 45%;
+
+  @media (max-width: 1250px) {
+    width: 100%;
+  }
 `;
 
 export const TestimonialSection = styled.div`
