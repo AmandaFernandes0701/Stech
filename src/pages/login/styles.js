@@ -46,6 +46,7 @@ export const Container = styled.div`
     }
   }
 `;
+
 export const Form = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,6 +73,18 @@ export const Form = styled.div`
 
 export const Title = styled.h1`
   font-size: 45px;
+  background: ${({ theme }) =>
+    `linear-gradient(90deg, ${theme.colors.primary} 50%, white 50%)`};
+  background-size: 200%;
+  background-position: right bottom;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 1.3s ease;
+
+  &:hover {
+    background-position: left bottom;
+  }
 `;
 
 export const TitleTestimonial = styled.h1`

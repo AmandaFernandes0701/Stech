@@ -158,6 +158,7 @@ export const WhiteCircle = styled.div`
   border-radius: 50%;
   position: relative;
   z-index: 2;
+  transition: transform 0.4s ease-in-out;
 
   @media (max-width: 1400px) {
     height: 80px;
@@ -169,5 +170,10 @@ export const WhiteCircle = styled.div`
   @media (max-width: 1300px) {
     bottom: 160px;
     left: 20px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1) rotate(90deg);
   }
 `;
