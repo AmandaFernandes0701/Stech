@@ -3,7 +3,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import InfoIcon from "@mui/icons-material/Info";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,11 @@ import {
   ForgotPassword,
   ForgotPasswordLink,
   SocialLogin,
+  TestimonialDiv,
   TestimonialSection,
+  TestimonialSectionTop,
+  GreenSquare,
+  BlackCircle,
   TestimonialCard,
   MotionDiv,
   Tooltip,
@@ -34,14 +38,14 @@ import {
 const PasswordTooltip = () => (
   <Tooltip className="tooltip">
     <ul>
-      <li>
+      <p>
         <strong>Must contain at least:</strong>
-      </li>
-      <li>- 6 characters long</li>
-      <li>- 1 uppercase letter</li>
-      <li>- 1 lowercase letter</li>
-      <li>- 1 number</li>
-      <li>- 1 special character</li>
+      </p>
+      <p>- 6 characters long</p>
+      <p>- 1 uppercase letter</p>
+      <p>- 1 lowercase letter</p>
+      <p>- 1 number</p>
+      <p>- 1 special character</p>
     </ul>
   </Tooltip>
 );
@@ -55,6 +59,18 @@ const socialIcons = [
 const Login = () => {
   const navigate = useNavigate();
   const carouselSlides = useCarouselContent();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const [form, setForm] = useState({
     email: "",
@@ -155,31 +171,52 @@ const Login = () => {
           ))}
         </SocialLogin>
       </Form>
-      <TestimonialSection>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <TitleTestimonial>What&apos;s our</TitleTestimonial>
-          <TitleTestimonial>Jobseekers Said.</TitleTestimonial>
-        </motion.div>
-        <TestimonialCard>
-          <MotionDiv
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+      {!isSmallScreen && (
+        <TestimonialDiv>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-end",
+            }}
           >
-            <Text>
-              Searching and finding your dream job is now easier than ever.
-            </Text>
-            <Text>Just browse a job and apply if you need to.</Text>
-          </MotionDiv>
-          <Carousel slides={carouselSlides} />
-        </TestimonialCard>
-      </TestimonialSection>
+            <TestimonialSectionTop />
+            <GreenSquare />
+            <BlackCircle />
+          </div>
+          <TestimonialSection>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+                top: "-50px",
+              }}
+            >
+              <TitleTestimonial>What&apos;s our</TitleTestimonial>
+              <TitleTestimonial>Jobseekers Said.</TitleTestimonial>
+            </motion.div>
+            <TestimonialCard>
+              <MotionDiv
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+              >
+                <Text>
+                  Searching and finding your dream job is now easier than ever.
+                </Text>
+                <Text>Just browse a job and apply if you need to.</Text>
+              </MotionDiv>
+              <Carousel slides={carouselSlides} />
+            </TestimonialCard>
+          </TestimonialSection>
+        </TestimonialDiv>
+      )}
     </Container>
   );
 };

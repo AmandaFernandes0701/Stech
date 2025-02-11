@@ -13,15 +13,12 @@ export const Container = styled.div`
   background: ${theme.colors.inputBackground};
   padding: 0 5%;
 
-  .indent {
-    padding-left: 5px;
+  @media (max-width: 1300px) {
+    gap: 2vh;
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 20px;
-    gap: 3vh;
-    height: auto;
+  .indent {
+    padding-left: 5px;
   }
 `;
 
@@ -34,6 +31,10 @@ export const Form = styled.div`
   padding: 40px;
   width: 100%;
   max-width: 500px;
+
+  @media (max-width: 1100px) {
+    width: 48%;
+  }
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -56,10 +57,6 @@ export const TitleTestimonial = styled.h1`
   font-size: 50px;
   align-self: flex-start;
   padding-left: 25px;
-
-  &:first-of-type {
-    padding-top: 15px;
-  }
 
   @media (max-width: 1180px) {
     font-size: 40px;
@@ -198,6 +195,7 @@ export const SocialLogin = styled.div`
 export const Text = styled.p`
   font-size: ${theme.fontSizes.text};
   font-weight: 500 !important;
+  font-size: 12px !important;
 
   @media (max-width: 1200px) {
     font-size: 12px !important;
@@ -221,17 +219,54 @@ export const TextBold = styled.p`
   }
 `;
 
+export const TestimonialDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 85vh;
+`;
+
 export const TestimonialSection = styled.div`
   color: white;
   background-color: ${theme.colors.primary};
-  border-radius: 15px 130px 130px 15px;
-  width: 85vh;
+  border-radius: 0px 40px 15px 15px;
   padding: 20px;
+  width: 100%;
 
   @media (max-width: 768px) {
     width: 90%;
     padding: 15px;
   }
+`;
+
+export const TestimonialSectionTop = styled.div`
+  color: white;
+  background-color: ${theme.colors.primary};
+  border-radius: 15px 40px 0px 0px;
+  height: 80px;
+  padding: 20px;
+  width: 85%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 15px;
+  }
+`;
+
+export const GreenSquare = styled.div`
+  background-color: ${theme.colors.primary};
+  height: 50px;
+  width: 50px;
+`;
+
+export const BlackCircle = styled.div`
+  background-color: ${theme.colors.inputBackground};
+  height: 60px;
+  width: 60px;
+  border-radius: 0px 0px 0px 50%;
+  position: relative;
+  top: 0;
+  left: -50px;
+  z-index: 1;
 `;
 
 export const TestimonialCard = styled.div`
@@ -294,9 +329,5 @@ export const HeadingWrapper = styled.div`
 `;
 
 export const MotionDiv = styled(motion.div)`
-  padding: 50px 0px 20px 25px;
-
-  @media (max-width: 1350px) {
-    padding: 10px 0px 10px 10px;
-  }
+  padding: 0px 0px 20px 25px;
 `;

@@ -20,7 +20,7 @@ export const useCarouselContent = () => {
           ];
           const subtitles = [
             "Join a company that values you",
-            "Empowering Employees and Driving Innovation",
+            "Empowering Teams, Fueling Innovation",
             "Where Creativity and Diversity Thrive",
             "Grow, Innovate, Lead",
           ];

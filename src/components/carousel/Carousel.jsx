@@ -1,4 +1,5 @@
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import AutoAwesome from "@mui/icons-material/AutoAwesome";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -6,7 +7,16 @@ import { Text, TextBold, MotionDiv } from "../../pages/login/styles";
 import { useCarouselContent } from "../../utils/carouselContent";
 import Loading from "../loading/Loading";
 
-import { ArrowsContainer, ArrowButton, WhiteCard, InnerCard } from "./styles";
+import {
+  ArrowsContainer,
+  ArrowButton,
+  WhiteCard,
+  InnerCard,
+  InnerCardSectionTop,
+  GreenCircle,
+  WhiteCircle,
+  WhiteSquare,
+} from "./styles";
 
 const Carousel = () => {
   const slides = useCarouselContent();
@@ -44,7 +54,17 @@ const Carousel = () => {
           <ArrowForward />
         </ArrowButton>
       </ArrowsContainer>
-
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "flex-end",
+        }}
+      >
+        <InnerCardSectionTop />
+        <WhiteSquare />
+        <GreenCircle />
+      </div>
       <InnerCard>
         <div className="text-container">
           <motion.div
@@ -55,7 +75,7 @@ const Carousel = () => {
             transition={{ duration: 1 }}
           >
             <TextBold>{slides[currentSlide].title}</TextBold>
-            <TextBold style={{ paddingBottom: "10px" }}>
+            <TextBold style={{ paddingBottom: "25px" }}>
               {slides[currentSlide].subtitle}
             </TextBold>
             {slides[currentSlide].text.map((line, index) => (
@@ -71,6 +91,9 @@ const Carousel = () => {
             ))}
           </motion.div>
         </div>
+        <WhiteCircle>
+          <AutoAwesome sx={{ color: "#101010", fontSize: 30 }} />
+        </WhiteCircle>
         <motion.div
           key={currentSlide}
           initial={{ opacity: 0 }}
@@ -79,11 +102,25 @@ const Carousel = () => {
           transition={{ duration: 1 }}
         >
           <div className="circle-container">
-            <div className="circle">
+            <div
+              className="circle"
+              style={{
+                position: "relative",
+                right: "20px",
+                width: "120px",
+                height: "120px",
+              }}
+            >
               <img
                 src={slides[currentSlide].image}
                 alt="Person"
                 className="circle-image"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
               />
             </div>
           </div>
