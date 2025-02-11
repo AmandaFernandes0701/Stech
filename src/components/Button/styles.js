@@ -10,7 +10,7 @@ export const ButtonContainer = styled.button`
   background-color: ${(props) =>
     props.loading ? colors.primaryDark : colors.primary};
   color: ${colors.text};
-  font-size: ${fontSizes.text};
+  font-size: ${fontSizes.subtitle};
   font-weight: 600;
   border: none;
   border-radius: ${borderRadius};
