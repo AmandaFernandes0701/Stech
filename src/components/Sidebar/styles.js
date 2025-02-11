@@ -124,10 +124,7 @@ export const SubMenu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-
-  @media (max-width: 769px) {
-    margin-top: 5px;
-  }
+  margin-top: 5px;
 `;
 
 export const NotificationBadge = styled.span`
