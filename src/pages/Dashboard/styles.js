@@ -14,7 +14,6 @@ export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 100vh;
   background: ${theme.colors.formBackground};
   padding: 20px;
 

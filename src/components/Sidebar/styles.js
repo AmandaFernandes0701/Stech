@@ -9,7 +9,6 @@ export const SidebarContainer = styled.div`
   width: ${(props) => (props.collapsed ? "45px" : "250px")};
   background: #181818;
   color: white;
-  height: 100vh;
   font-family: Arial, sans-serif;
   transition: width 0.5s ease;
   padding-top: 25px;

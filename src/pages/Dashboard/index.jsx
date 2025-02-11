@@ -119,6 +119,7 @@ const Dashboard = () => {
           <Search className="search-icon" />
           <input type="text" placeholder="Search here..." />
         </SearchContainer>
+
         <AttendanceGrid>
           <Header>
             <p>Employee Details</p>
