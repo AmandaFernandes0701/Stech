@@ -217,17 +217,12 @@ Here are some ideas for future enhancements to the project:
    - Use JWT (JSON Web Tokens) for secure user authentication.
    - Implement a database (e.g., MongoDB, PostgreSQL) to store user data and dashboard information.
 
-### 2. **Sidebar Menu Improvements**
-   - Add a collapsible sidebar menu for better navigation on smaller screens.
-   - Implement nested menus for complex navigation structures.
-   - Use **Framer Motion** to add smooth transitions to the sidebar.
-
-### 3. **Accessibility Enhancements**
+### 2. **Accessibility Enhancements**
    - Ensure all components are fully accessible using ARIA attributes.
    - Add keyboard navigation support for all interactive elements.
    - Conduct accessibility audits using tools like **Lighthouse** or **axe**.
 
-### 4. **Testing**
+### 3. **Testing**
    - Add unit tests using **Jest** and **React Testing Library**.
    - Implement end-to-end testing with **Cypress**.
    - Use snapshot testing to ensure UI consistency.
