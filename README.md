@@ -26,7 +26,7 @@ The live version is available at: [STech - Amanda](https://stech-amanda.vercel.a
   <summary>Click here to view project images</summary>
 
   ### Homepage - Desktop Version
-  ![image](https://github.com/user-attachments/assets/603c8ca2-f947-42ef-82b4-6db7d8ce1870)
+  ![image](https://github.com/user-attachments/assets/0b572189-80d6-4e97-991f-bba3e07ff285)
 
   ### Dashboard - Desktop Version
   ![image](https://github.com/user-attachments/assets/cc762334-5ab7-464c-b055-631bcf5d75e8)
