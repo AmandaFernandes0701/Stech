@@ -22,6 +22,27 @@ The solution was designed with clean architecture principles, ensuring code reus
 
 The live version is available at: [STech - Amanda](https://stech-amanda.vercel.app/)  
 
+<details>
+  <summary>Click here to view project images</summary>
+
+  ### Homepage - Desktop Version
+  ![image](https://github.com/user-attachments/assets/603c8ca2-f947-42ef-82b4-6db7d8ce1870)
+
+  ### Dashboard - Desktop Version
+  ![image](https://github.com/user-attachments/assets/cc762334-5ab7-464c-b055-631bcf5d75e8)
+
+  ### Dashboard - Mobile Version
+  ![image](https://github.com/user-attachments/assets/8ae26002-f793-436b-ad7a-b29c3d78ca7a)
+
+  ### Menu from Dashboard - Mobile Version
+  ![image](https://github.com/user-attachments/assets/653d8952-cf26-4328-99fa-6681b910aa6e)
+
+  I followed the provided Figma design closely for this challenge, with a strong emphasis on ensuring responsiveness and accessibility. However, given the time constraints, I made a few adjustments to simplify the structure. I implemented responsive design techniques to ensure the layout adapts fluidly across various screen sizes, adjusting elements based on resolution.
+
+In addition, I focused on usability and accessibility best practices, using appropriate color contrasts to enhance readability, and incorporating ARIA roles to improve screen reader navigation. I made adjustments to the color scheme to optimize visual hierarchy and legibility, particularly on mobile devices, ultimately aiming for an overall improved user experience.
+</details>
+
+
 ---
 
 ## Technologies Used
